@@ -1,0 +1,636 @@
+/* ------------------------------ */ 
+/* BASIC SETUP */
+/* ------------------------------ */
+
+body, html {
+	background-color: black !important;
+	color: black;
+	font-family: "Lato", "Arial", sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	text-rendering: optimizeLegibility;
+
+	height: 100%;
+
+
+}
+
+
+/* ------------------------------ */ 
+/* HEADER */
+/* ------------------------------ */
+
+header {
+	border-bottom: 20px;
+	margin-bottom: 10px;
+
+}
+
+/* ----- DISTINCT MIND LOGO ----- */
+h1 {
+
+	font-family: Secular One;
+	font-size: 40px;
+	color: white;
+	text-align: left;
+	width: 300px;
+	height: auto;
+	float: left;
+	margin-left: 30px;
+	margin-bottom: 5px;
+}
+
+h1:hover {
+	cursor: pointer;
+}
+
+/* ----- NAVIGATION LINKS ----- */
+
+li span {
+	z-index: 30;
+}
+
+.main-nav  {
+	float: right;
+	list-style: none;
+	margin-top: 55px;
+	z-index: 30;
+
+}
+
+.main-nav li   {
+	display: inline-block;
+	margin-left: 20px;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited {
+
+	padding-bottom: 5px;
+	margin-left: 30px;
+	
+	transition: border-bottom 0.2s;
+	-webkit-transition: border-bottom 0.2s;
+    -moz-transition: border-bottom 0.2s;
+    -ms-transition: border-bottom 0.2s;
+}
+
+#latest-work {
+	/*border-bottom: 2px solid white;*/
+
+}
+
+.current {
+/*	border-bottom: 1px solid black;
+*/	font-weight: 700;
+}
+
+#latest-work:before{
+	content : "";
+  	position: absolute;
+  	left    : 9%;
+  	
+  	bottom  : 0;
+  	
+  	width   : 80%;  
+  	border-bottom:1px solid magenta;
+	border-bottom: 2px solid white;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+	
+	/*border-bottom: 2px solid transparent !important;*/
+
+}
+
+.link {
+	outline: none;
+	text-decoration: none;
+	position: relative;
+	font-size: 2em;
+	z-index: 30;
+	line-height: 1;
+	color: white;
+	display: inline-block;
+}
+
+.link--kumya {
+	font-family: 'Secular One', sans-serif;
+	text-transform: uppercase;
+	z-index: 30;
+	font-size: 1em;
+	overflow: hidden;
+	padding: 10px 10px 0;
+	line-height: 1;
+	color: white;
+}
+
+.link--kumya:hover {
+	color: black;
+}
+
+.link--kumya::after {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	background: #fff;
+	-webkit-transform: translate3d(101%,0,0);
+	transform: translate3d(101%,0,0);
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.makeSure {
+
+	background: #fff;
+	color: black;
+
+}
+
+.makeSure .link--kumya::after {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	background: #fff;
+	-webkit-transform: translate3d(101%,0,0);
+	transform: translate3d(101%,0,0);
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.transe {
+
+	-webkit-transition: all 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
+}
+
+.link--kumya:hover::after {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.link--kumya span {
+	display: block;
+	position: relative;
+}
+
+.link--kumya span::before {
+
+	border: none;
+	content: attr(data-letters);
+	position: absolute;
+	color: black;
+	left: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 0%;
+	-webkit-transition: width 0.5s;
+	transition: width 0.5s;
+	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.link--kumya:hover span::before {
+	width: 100%;
+}
+
+/*Collage Styling*/
+
+.Collage {
+	padding: 3px 15px;
+	position: relative;
+	display: none;
+}
+
+/* ----- Div DropDown ----- */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 30;   
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    /*display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    transform: translate(50px, -5px);
+    width: 87%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    left: -8.7%;*/
+
+    display: none;
+    position: absolute;
+   /* background-color: #f9f9f9;*/
+    background-color: white;
+    width: 87%;
+    transform: translate(30px, -5px);
+    /*width: 87%;*/
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+}
+
+
+
+/* Links inside the dropdown */
+.dropdown-content a {
+	margin: 0 !important;
+	min-width: 100%;
+    color: black;
+    padding: 12px 16px;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-decoration: none;
+    font-family: 'Exo 2', sans-serif;
+    /*display: inline-block;*/
+    list-style: none;
+    float: left;
+    z-index: 30;
+    position: relative;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+	background-color: black;
+	color: white;
+
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+
+	display:block;
+
+	transition: all 300ms ease-in-out;
+	-webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+
+}
+
+.droppingDown {
+    display: inline-block;
+}
+
+
+
+/* ------------------------------ */ 
+/* REUSABLE COMPONENTS */
+/* ------------------------------ */
+
+.row {
+	max-width: 1199px;
+	margin: 0 auto;
+
+}
+
+
+/* ------------------------------ */ 
+/* GRID IMAGES */
+/* ------------------------------ */
+
+
+ul {
+ 	margin: 0;
+ 	padding: 0;
+ 	list-style: none;
+ 	transition: margin 200ms ease-in-out;
+
+
+}
+
+.first-section-wrap {
+	z-index: 20;
+	position: relative;
+	overflow: visible !important;
+
+	transition: all 200ms ease-in-out;
+	-webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+}
+/*
+.hover-to-portraits {
+
+
+    height: 100%;
+    width: 100%;
+    right: 0;
+    left: 98%;
+    position: fixed;
+    z-index: 10;
+
+    transition: all 200ms ease-in-out;
+}*/
+/*
+.hover-to-portraits i {
+	z-index: 15;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	color: white;
+	opacity: 0;
+	top: 40%;
+	margin-left: 10px;
+	font-size: 40px;
+	display: inline-block;
+
+	cursor: pointer;
+
+	-webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+
+    transition: opacity 200ms ease-in-out;
+
+}*/
+
+
+.allImages {
+	margin-left: 2%;
+	overflow: none !important;
+}
+
+/* ----- WRAPPER ----- */
+.wrapItAroundMan {
+	width: 32%;
+	
+	height: 260px !important;
+	margin: 0.3% 0.3% 0px 0.3%; 
+	padding: 0;
+	position: relative;
+	float: left;
+	margin-bottom: 2px;
+
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+
+    flex-wrap: wrap;
+    flex-direction: row;
+
+	left: 0%;
+	z-index: 70;
+
+	transition: all 300ms ease-in-out;
+	-webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+
+}
+
+.wrapItAroundMan img {
+	object-fit: cover !important;
+
+	flex-shrink:0;
+    min-width:100%;
+    min-height:100%
+
+}
+
+@media (max-width: 871px) {
+	.image {
+		height: 220px !important;
+	}
+
+	.wrapItAroundMan {
+		height: 220px !important;
+	}
+}
+
+/* ----- IMAGE DIV ----- */
+.image {
+
+	height: 260px;
+	/*max-width: 260px;*/
+	width: 396.08px;
+	/*margin: 0.3% 0.3% 0px 0.3%; 
+	height: 100%;
+	padding: 0;
+	position: relative;
+	float: left;
+	*/
+	/*max-height: 260px !important;*/
+	object-fit: cover;
+
+	width: 100%;
+	/*display: inline-block;
+	left: 0%;*/
+	z-index: 70;
+
+	transition: all 300ms ease-in-out;
+	-webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+}
+
+.image img {
+	max-height:100%; 
+	max-width:100%;
+	z-index: 0;
+
+/*	flex-shrink:0;
+*/  /*min-width:100%;
+    min-height:100%*/
+}
+
+.my-row {
+	width: 32%; 
+    height: 260px; 
+    overflow: hidden; 
+}
+
+.my-row img {
+	min-width: 100%;
+	min-height: 100%;
+
+	object-fit: cover;
+}
+
+/* ----- HOVER DIV ----- */
+.hoverDiv {
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	margin: 0 auto;
+	background-position: center;
+	left: 25%;
+	top: 25%;
+	cursor: pointer;
+
+}
+
+/* ------------------------------ */ 
+/* OVERLAY */
+/* ------------------------------ */
+
+.overlay {
+	position: fixed;
+	overflow-y: hidden !important;
+	background: black;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	z-index: 20;
+
+	display: flex;
+	justify-content: center;
+
+	opacity: 0;
+	pointer-events: none;
+
+	transition: all 330ms ease-in-out;
+	-webkit-transition: all 330ms ease-in-out;
+    -moz-transition: all 330ms ease-in-out;
+    -ms-transition: all 330ms ease-in-out;
+}
+
+.is-open {
+	opacity: 1;
+	pointer-events: auto;
+	overflow-y: hidden !important;
+	z-index: 90;
+}
+
+
+.modal {
+
+	min-width: 70%;
+    position: relative;
+    margin: 20px;
+
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    
+    transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+
+	
+}
+
+.modal img {
+	
+	transition: all 300ms ease-in-out;
+	/*align-self: center;
+	margin: auto;*/
+
+	position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.is-open .modal {
+	/*transform: translate(0px, 0px );*/
+
+}
+
+
+.close-btn {
+	/*position: absolute;
+	top: -35px;
+	right: -28px;
+	color: white;
+	height: 30px;
+	width: 30px;
+	font-size: 30px;
+	text-align: center; 
+	line-height: 30px;
+	cursor: pointer;
+	z-index: 20;*/
+
+	position: absolute;
+    top: -3%;
+    right: -5%;
+    color: white;
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    z-index: 20;
+
+	transition: all 100ms ease-in-out;
+}
+
+.close-btn:hover {
+	transform: scale(1.2);
+}
+
+.right-btn, .left-btn {
+	position: absolute;
+	color: white;
+	height: 30px;
+	width: 30px;
+	font-size: 30px;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+	z-index: 20;
+}
+
+.right-btn {
+	top: 50%;
+    left: 110%;
+}
+
+.left-btn {
+	top: 50%;
+    right: 110%;
+
+/*    right: 113%;
+*/}
+
+/* ------------------------------ */ 
+/* JQUERY ANIMATION CLASSES */
+/* ------------------------------ */
+
+.zoomIn {
+	opacity: 0.8!important;
+	transform: scale(1.3);
+	-webkit-transform:scale(1.3);
+	-webkit-transition: all 0.7s ease;
+	-moz-transition: all 0.7s ease;
+	-ms-transition: all 0.7s ease;
+	transition: all 0.7s ease;
+}
+
+.zoomOut {
+	-webkit-transition: all 0.7s ease;
+	-moz-transition: all 0.7s ease;
+	-ms-transition: all 0.7s ease;
+	transition: all 0.7s ease;
+
+}
+
