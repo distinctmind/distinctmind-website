@@ -1,0 +1,1 @@
+var picture = document.getElementById("fullscreen_image");
