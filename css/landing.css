@@ -21,5 +21,10 @@ body, html {
 	margin: auto; 
 	max-width: 50%;
 	min-height: 50%;
-	
+}
+
+@media (max-width: 900px) {
+	#fullscreen_div img {
+		max-width: 100%;
+	}
 }
