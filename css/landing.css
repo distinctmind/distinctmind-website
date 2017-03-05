@@ -1,30 +1,144 @@
-body, html {
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
 
-	background-color: black;
+
+#centerButtons {
+
+	position:absolute;
+	height: 100vh;
+	width: 100%;
+	top: 0;
+	bottom: 0;
+
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	text-align: center;
+}
+
+#centerButtons ul {
+
+	margin: 0;
+	padding: 0;
+
+	position: absolute;
+
+	z-index: 1000;
+
+	font: 1.8em 'Chivo', Arial, Helvetica, sans-serif;
+	background-color: transparent;
+	color: white;
+	
+}
+
+#centerButtons li {
+
+	display: inline-block;
+	list-style: none;
+
+
+	border: 2px solid white;
+	border-radius:7%;
+
+	-webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+#centerButtons li a {
+	display: block;
+    text-decoration: none;
+    color: white;
+}
+
+#centerButtons li a:hover {
+	background-color: white;
+	color: black;
+
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
 }
 
-#fullscreen_div {
-	position: fixed; 
-	top: -50%; 
-	left: -50%; 
-	width: 200%; 
-	height: 200%;
+#overlay {
+
+	position: absolute;
+	background-color: rgba(0,0,0,0.3);
+
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
 }
 
-#fullscreen_div img {
-	position: absolute; 
-	top: 0; 
-	left: 0; 
-	right: 0; 
-	bottom: 0; 
-	margin: auto; 
-	max-width: 50%;
-	min-height: 50%;
+
+.layer1, .layer2, .layer3, .layer4, .layer5, .layer6, .layer7, .layer8, .layer9, .layer10 {
+
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	
+	-webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+
+	background-position   : 50% 50% !important; 
+	background-repeat: no-repeat !important;
+	z-index: -10;
+
 }
 
-@media (max-width: 900px) {
-	#fullscreen_div img {
-		max-width: 100%;
-	}
+.layer1 {
+	background: url(../Images/landing/01.jpg);
 }
+
+.layer2 {
+	background: url(../Images/landing/02.jpg) ;
+}
+
+.layer3 {
+	background: url(../Images/landing/03.jpg) ;
+}
+
+.layer4 {
+	background: url(../Images/landing/04.jpg) ;
+}
+
+.layer5 {
+	background: url(../Images/landing/05.jpg) ;
+}
+
+.layer6 {
+	background: url(../Images/landing/06.jpg) ;
+}
+
+.layer7 {
+	background: url(../Images/landing/07.jpg) ;
+}
+
+.layer8 {
+	background: url(../Images/landing/08.jpg) ;
+}
+
+.layer9 {
+	background: url(../Images/landing/09.jpg) ;
+}
+
+.layer10 {
+	background: url(../Images/landing/10.jpg) ;
+}
+
+
+
+
+

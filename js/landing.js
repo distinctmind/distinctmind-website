@@ -1,42 +1,18 @@
-var pictures = [
+$(document).ready(function() {
 
-		'<img id="fullscreen_image" src="Images/landing/01.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/02.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/03.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/04.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/05.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/06.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/07.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/08.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/09.jpg">',
-		'<img id="fullscreen_image" src="Images/landing/10.jpg">'
-]
+	$("#photos div:gt(0)").hide();
 
-document.addEventListener("DOMContentLoaded", function() {
+	setInterval(function(){
 
-	var i = 1;
-	var divpic = $("#fullscreen_div");
-	
-	window.setInterval(function(){
 
-		
-		if (i == pictures.length-1) {
+		var currentImage = $("#photos div:visible");
 
-    		i = 0;
+		var next = currentImage.next().length ? currentImage.next() : $("#photos div:eq(0)");
 
-		} 
+		currentImage.fadeOut(1000);
 
-		divpic.fadeOut(100, function() {
+		next.fadeIn(1000);
 
-			$("#fullscreen_div img:last-child").remove();
-
-			divpic.append(pictures[i]);
-
-			i++;
-		
-		})
-			.fadeIn(100);					
-		
 	}, 4000);
 
 });
