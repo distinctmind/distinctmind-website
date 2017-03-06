@@ -2,6 +2,7 @@ html, body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	background-color: black;
 }
 
 
@@ -17,6 +18,8 @@ html, body {
   	justify-content: center;
   	align-items: center;
   	text-align: center;
+
+
 }
 
 #centerButtons ul {
@@ -25,12 +28,16 @@ html, body {
 	padding: 0;
 
 	position: absolute;
+	width: 30%;
+	height: 38px;
 
 	z-index: 1000;
 
 	font: 1.8em 'Chivo', Arial, Helvetica, sans-serif;
 	background-color: transparent;
 	color: white;
+
+
 	
 }
 
@@ -39,24 +46,37 @@ html, body {
 	display: inline-block;
 	list-style: none;
 
+	height: 100%;
+	
 
-	border: 2px solid white;
-	border-radius:7%;
-
-	-webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+	
 }
 
 #centerButtons li a {
 	display: block;
     text-decoration: none;
     color: white;
+
+    border: 2px solid white;
+	/*border-radius:7%;*/
+
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+#centerButtons li:first-child {
+	min-width: 30%;
+	margin-bottom: 10px;
+}
+#centerButtons li:nth-of-type(2) {
+	min-width: 50%;
 }
 
 #centerButtons li a:hover {
+
 	background-color: white;
 	color: black;
 
@@ -67,6 +87,7 @@ html, body {
     transition: all 0.3s ease-in-out;
 
 }
+
 
 #overlay {
 
