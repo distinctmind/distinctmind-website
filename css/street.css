@@ -1,3 +1,4 @@
+
 body,html {
 
 	background-color: black;
@@ -17,7 +18,7 @@ header h1 {
 
 	display: inline-block;
 	max-width: 25%;
-	margin: 28px 0 0 35px;
+	margin: 0 0 0 35px;
 	padding: 0;
 
 	font-family: 'Oswald', sans-serif;
@@ -31,44 +32,42 @@ header ul {
 
 	position: absolute;
 
-	margin:50px 0 0 80px;
-	padding: 0;
-	width: 60%;
-	height: 35px;
+    left: 0;
+    margin-left: 33.4%;
 
-	text-align: center;
+    padding: 0;
 
-	font-family: 'Oswald' , sans-serif;
-	font-weight: 500;
-	letter-spacing: 2.2px;
-	font-size: 20px;
+    width: 100%;
+    height: 35px;
 
-	display: inline-flex;
-  	justify-content: center;
-  	align-items: center;
-  	text-align: center;
+    text-align: center;
+    font-family: 'Oswald' , sans-serif;
+    font-weight: 500;
+    letter-spacing: 2.2px;
+    font-size: 20px;
+
+    display: inline-flex;
 	
 }
 
 header ul li {
 
-	margin-right: 50px;
-	width: 25%;
-	height: 35px;
+	margin-left: 2.1%;
+    width: 13.6%;
+    height: 35px;
 
-	background-color: white;
+    background-color: white;
+    display: inline-block;
 
-	display: inline-block;
-	list-style: none;
+    list-style: none;
+    border-bottom: 1px solid transparent;
 
-	border-bottom: 1px solid transparent;  
-
-	-webkit-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-	
+
 }
 
 header ul li a {
@@ -95,14 +94,77 @@ header ul li a {
 	color: white;
 }
 
+/*Animation for opacity transition of images on page load */
+@keyframes animateImages {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
 
 
+.container {
+
+  width: 100%;
+
+  margin-left: 18px;
+  overflow: hidden;
+  
+}
+
+.container div {
+
+	float: left;
+
+	position: relative;
+
+	height: 246.92px;
+	overflow: hidden;
+	margin: 0 1.5% 50px 1.5%;
+
+	background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
 
 
+.container div img {
 
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
 
+	animation-name: animateImages;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
+	animation-duration: 0.6s;
+}
 
+#firstImage {
+	height: auto;
+}
 
+@media (max-width: 1200px) { /* Two columns for tablets */
+  .container div {
+    width: 42.5%;
+  }
+
+}
+@media (min-width: 1200px) { /* Four columns for large devices */
+  .container div {
+    max-width: 29.333333333%;
+  }
+
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
 
 
