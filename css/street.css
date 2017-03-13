@@ -1,99 +1,9 @@
-
 body,html {
 
 	background-color: black;
+  overflow-x: hidden;
 
 }
-
-header {
-
-	width: 100%;
-	height: 100px;
-
-}
-
-header h1 {
-
-	position: relative;
-
-	display: inline-block;
-	max-width: 25%;
-	margin: 0 0 0 35px;
-	padding: 0;
-
-	font-family: 'Oswald', sans-serif;
-	letter-spacing: 2.2px;
-	font-size: 3em;
-
-	color: white;
-}
-
-header ul {
-
-	position: absolute;
-
-    left: 0;
-    margin-left: 33.4%;
-
-    padding: 0;
-
-    width: 100%;
-    height: 35px;
-
-    text-align: center;
-    font-family: 'Oswald' , sans-serif;
-    font-weight: 500;
-    letter-spacing: 2.2px;
-    font-size: 20px;
-
-    display: inline-flex;
-	
-}
-
-header ul li {
-
-	margin-left: 2.1%;
-    width: 13.6%;
-    height: 35px;
-
-    background-color: white;
-    display: inline-block;
-
-    list-style: none;
-    border-bottom: 1px solid transparent;
-
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-
-}
-
-header ul li a {
-
-	color: black;
-	text-decoration: none;
-	background-color: transparent;
-
-	-webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-
-}
-
-.listHoverOn {
-	background-color: black;
-	border-bottom: 1px solid white;
-
-}
-
-.anchorHoverOn {
-	color: white;
-}
-
 /*Animation for opacity transition of images on page load */
 @keyframes animateImages {
   0% {
@@ -104,20 +14,215 @@ header ul li a {
   }
 }
 
+header {
+
+	width: 100%;
+	height: 100px;
+
+}
+
+
+.modal {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  margin:0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 999;
+  overflow: none;
+  background-color: black;
+}
+
+.modal.menu ul {
+  position: relative;
+  margin: 0 auto;
+  top: 25%;
+  text-align: center;
+
+}
+
+.modal.menu ul li {
+  margin-bottom: 1.6%;
+}
+
+.modal.menu ul li a {
+
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 2.2px;
+  font-size: 2em;
+
+  color: white;
+  text-decoration: none;
+
+  border-bottom: 1px solid transparent;
+
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal.menu #closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal.picture {
+  z-index: 9;
+}
+
+.modalPicture {
+
+  z-index: 999;
+  position: absolute;
+  width: 1000px;
+  overflow: hidden;
+  height: auto;
+  width: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
+
+.modalPicture #biggerImage {
+  
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+
+  animation-name: animateImages;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-duration: 0.6s;
+
+}
+
+#burgerIcon {
+  visibility: hidden;
+  opacity: 0;
+
+  right: 3.3%;
+  width: auto;
+  height: auto;
+  max-height: 49px;
+  position: absolute;
+  cursor: pointer;
+
+  animation-name: animateImages;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-duration: 0.6s;
+
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+}
+
+header img {
+
+	position: relative;
+
+	display: inline-block;
+	width: auto;
+  height: auto;
+  max-width: 30%;
+  max-height: 50px; 
+	margin: 12px 0 0 25.2px;
+	padding: 0;
+
+}
+
+header .navBar {
+
+	position: absolute;
+
+  left: 0;
+  margin-left: 33.4%;
+
+  padding: 0;
+
+  width: 100%;
+  height: 35px;
+
+  text-align: center;
+  font-family: 'Oswald' , sans-serif;
+  font-weight: 500;
+  letter-spacing: 2.2px;
+  font-size: 20px;
+
+  display: inline-flex;
+
+}
+
+header .navBar li {
+
+	margin-left: 2.1%;
+  width: 13.6%;
+  height: 35px;
+  cursor: pointer;
+
+  background-color: white;
+  display: inline-block;
+
+  list-style: none;
+  border-bottom: 1px solid transparent;
+
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+}
+
+header .navBar li a {
+
+	color: black;
+	text-decoration: none;
+	background-color: transparent;
+
+	-webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+}
+
+header .navBar li:hover {
+  background-color: black;
+  border-bottom: 1px solid white;
+}
+
+header .navBar li:hover a {
+  color: white;
+}
+
+header .modal li a:hover {
+  border-bottom: 1px solid white;
+}
 
 .container {
 
   width: 100%;
-
   margin-left: 18px;
   overflow: hidden;
   
 }
 
-.container div {
+.container .image-div {
 
 	float: left;
-
 	position: relative;
 
 	height: 246.92px;
@@ -125,17 +230,18 @@ header ul li a {
 	margin: 0 1.5% 50px 1.5%;
 
 	background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
 
 }
 
 
-.container div img {
+.container .image-div img {
 
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
+  cursor: pointer;
 
 	animation-name: animateImages;
 	animation-iteration-count: 1;
@@ -147,17 +253,78 @@ header ul li a {
 	height: auto;
 }
 
-@media (max-width: 1200px) { /* Two columns for tablets */
-  .container div {
-    width: 42.5%;
+.filter-mask { 
+  position:relative;
+  height: 100%; 
+  top:0; 
+  left:0; 
+  bottom:0; 
+  right:0; 
+  -webkit-animation:filterMask 1s ease-in-out both; 
+  animation:filterMask 1s ease-in-out both 
+}
+.filtered .image-div {
+  display: none ;
+}
+.filtered .image-div.selected {
+  display: block ;
+}
+@-webkit-keyframes filterMask { 
+  0% { background:transparent } 
+  50% { background:black } 
+  100% { background:transparent } 
+  }
+@keyframes filterMask { 
+  0% { background:transparent } 
+  50% { background:black } 
+  100% { background:transparent } 
   }
 
-}
+
 @media (min-width: 1200px) { /* Four columns for large devices */
-  .container div {
+  .container .image-div {
     max-width: 29.333333333%;
   }
 
+  header #logo {
+    max-width: 29.333333333%;
+  }
+
+}
+
+@media (max-width: 1200px) { /* Two columns for tablets */
+  .container .image-div {
+    width: 45.4%;
+  }
+
+  header #logo {
+    width: 45.4%;
+    margin-left: 20px;
+  }
+
+}
+
+
+@media (max-width: 917px) {
+  .navBar {
+    visibility: hidden;
+  }
+
+  #burgerIcon {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  #logo {
+    max-width: 70%;
+  }
+
+}
+
+@media (max-width: 750px) {
+  .container .image-div {
+    width: 90%;
+  }
 }
 
 .clearfix:after {
