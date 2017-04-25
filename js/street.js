@@ -1,9 +1,36 @@
-
 /* Used to continually adjust the fixed height of each div upon window resize */
 /* Note this doesn't change the size of the first div because every other div's height is based on the first one. */
 function adjustHeight() {
-	var currentImageHeight = $("#firstImage").height();
-	$(".container .image-div").css('height', currentImageHeight);
+	
+	var currentLandscapeHeight = $("#firstImage").height();
+	//console.log("Landscape height is " + String(currentLandscapeHeight));
+	$(".container .landscape").css('height', currentLandscapeHeight);
+
+	
+
+	//$("#firstPortrait img").onload = function(){
+		
+		console.log($("#firstPortrait img").height());
+		//console.log("Portrait height is " + String(currentPortraitHeight));
+		$(".container .portrait").css('height', $("#firstPortrait img").height());
+
+	//};
+
+	/*
+	var firstImage = document.getElementById("firstImage");
+	var firstPortrait = document.getElementById("firstPortrait").getElementsByTagName('img');
+	
+	firstImage.onload = function() {
+        var currentLandscapeHeight = firstImage.height();
+        $(".container .landscape").css('height', currentLandscapeHeight);
+    };
+
+    firstPortrait.onload = function() {
+    	var currentPortraitHeight = firstPortrait.height();
+    	$(".container .portrait").css('height', currentPortraitHeight);
+    }
+    */	
+	
 }
 
 var biggerImages = [ 
@@ -50,7 +77,6 @@ function showPictures(theFilter) {
 	for (var i = 0; i < images.length; i++) {
 		images[i].src = images[i].getAttribute('data-src');
 	}
-
 }
 
 function filterImages() {
@@ -75,32 +101,183 @@ function filterImages() {
 		}, 100);
 
 		setTimeout(function(){
+			adjustHeight();
 			$(".filter-mask").removeClass("filter-mask");
-
 		}, 500);
 
 	});
 }
 
+function modalOffSet() {
+
+	// Get the window viewport height
+	viewportHeight = $(window).height();
+	// cache your dialog element
+	$myDialog = $('.modalPicture');
+	// now set your dialog position
+	$myDialog.css('top',  (viewportHeight/2)+ $(document).scrollTop());
+}
+
+function changeType(thePic) {
+
+	console.log(thePic);
+	var picType = thePic.getAttribute('data-type');
+	
+	if (picType) {
+		$("#biggerImage").attr("data-type", picType);
+	} else {
+		$("#biggerImage").attr("data-type", "");
+	}
+}
+
 function popPicture(thePicture) {
+
 	showModal("picture");
-	$("#biggerImage").attr('src', thePicture.attr('data-full-path'));	
+	changeType(thePicture[0]);	
+	
+	$("#biggerImage").attr('src', thePicture.attr('data-full-path'));
+	$("#biggerImage").one("load",function(){modalMobileReady()});
+	
+
+	$("#biggerImage").one('load', function(){
+		modalMobileReady();
+	}).attr('src', thePicture.attr('data-full-path'));	
+	
 }
 
 function clickPicture() {
-
+	
 	$(".container .image-div img").click(function(){
+		$(this).addClass("current");
 		popPicture($(this));
+
 	});
 
 	$(".modal.picture").click(function(){
 
 		if ($(this) == $("#biggerImage")) {
+		
 		} else {
+
+			$("#biggerImage").removeAttr('src');
+			$("#biggerImage").removeAttr('class');
+			$(".modalPicture").css('min-width', '');
+			$(".modalPicture").removeClass("mobileDiv");
+
+			$(".current").removeClass("current");
 			closeModal("picture");
 		}
 		
 	});
+}
+
+
+function modalMobileReady() {
+
+	var image = $("#biggerImage");
+	var imageWidth = $("#biggerImage").width();
+	var div = $(".modalPicture");
+	var type = "";
+
+	if (image.attr("data-type")) {
+		type = image.attr("data-type");
+	}
+
+	if (type == "portrait") {
+
+		if ($(window).width() <= 475) {
+			
+			image.addClass("mobile");
+			div.css('min-width', '');
+			div.addClass("mobileDiv");
+
+		} else {
+
+			image.removeClass("mobile");
+			div.removeClass("mobileDiv");
+			
+			var modalWidth = imageWidth;
+			div.css('min-width', String(modalWidth) + "px");
+
+		}
+
+	} else {
+
+		if ($(window).width() <= 880) {
+			
+			image.addClass("mobile");
+			div.css('min-width', '');
+			div.addClass("mobileDiv");
+
+		} else {
+
+			image.removeClass("mobile");
+			div.removeClass("mobileDiv");
+			
+			var modalWidth = imageWidth;
+			div.css('min-width', String(modalWidth) + "px");
+
+		}
+	}
+}
+
+
+function modalControl() {
+
+	var imageToChange = $("#biggerImage");
+	var modal = $(".modalPicture");
+	
+	$("html").keydown(function(event) {
+
+		var selectedDiv = $(".current");
+		var next;
+		var prev;
+
+		if (selectedDiv.parent().next(".selected").length) {
+			next = selectedDiv.parent().next(".selected").children()[0];
+		} else {
+			next = $(".selected:first").children()[0];
+		}
+
+		if (selectedDiv.parent().prev(".selected").length) {
+			prev = selectedDiv.parent().prev(".selected").children()[0];
+		} else {
+			prev = $(".selected:last").children()[0];
+		}		
+
+		if (event.keyCode == 37) {
+		  //move to the left
+		  imageToChange.fadeOut(100, function(){
+
+		  	imageToChange.one('load', function(){
+		  		imageToChange.fadeIn(200);
+		  		changeType(prev);
+		  		modalMobileReady();	
+		  	}).attr('src', prev.getAttribute('data-full-path'));
+		  	
+		  	$(".current").removeClass("current");
+		  	prev.className += " current";
+
+		  });
+		 
+
+		} else if (event.keyCode == 39) {
+			
+			imageToChange.fadeOut(100, function(){
+
+				imageToChange.one('load', function(){
+					imageToChange.fadeIn(200);
+					changeType(next);
+					modalMobileReady();
+				}).attr('src', next.getAttribute('data-full-path'));
+				
+				$(".current").removeClass("current");
+		  		next.className += " current";
+			});
+		  	
+		  	
+		}
+	})
 }
 /* Called once before the page even finishes loading all elements to make sure it displays correct height */
 adjustHeight();
@@ -108,13 +285,16 @@ adjustHeight();
 
 $(document).ready(function(){
 
+	adjustHeight();
 	filterImages();
 	clickPicture();
+	modalControl();
 
 	$(window).resize(function() {
   		
   		adjustHeight();
-  		
+  		modalMobileReady();
+  			
   		if ($(window).width() <= 917) {
 			$("header .navBar").fadeOut(300);
 
