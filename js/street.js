@@ -3,34 +3,13 @@
 function adjustHeight() {
 	
 	var currentLandscapeHeight = $("#firstImage").height();
-	//console.log("Landscape height is " + String(currentLandscapeHeight));
 	$(".container .landscape").css('height', currentLandscapeHeight);
+	$(".container .portrait").css('height', $("#firstPortrait img").height());
 
-	
-
-	//$("#firstPortrait img").onload = function(){
-		
-		console.log($("#firstPortrait img").height());
-		//console.log("Portrait height is " + String(currentPortraitHeight));
-		$(".container .portrait").css('height', $("#firstPortrait img").height());
-
-	//};
-
-	/*
-	var firstImage = document.getElementById("firstImage");
-	var firstPortrait = document.getElementById("firstPortrait").getElementsByTagName('img');
-	
-	firstImage.onload = function() {
-        var currentLandscapeHeight = firstImage.height();
-        $(".container .landscape").css('height', currentLandscapeHeight);
-    };
-
-    firstPortrait.onload = function() {
-    	var currentPortraitHeight = firstPortrait.height();
-    	$(".container .portrait").css('height', currentPortraitHeight);
-    }
-    */	
-	
+	if ($(window).width() <= 1200) {
+		var portraitHeight = (currentLandscapeHeight*2) + 50;
+		$("#thirdPortrait").css('height', portraitHeight);
+	}
 }
 
 var biggerImages = [ 
