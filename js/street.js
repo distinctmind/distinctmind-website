@@ -64,6 +64,7 @@ function filterImages() {
 
 		var filter = $(this).children().attr("class");
 		showPictures(".image-div" + "." + filter + " img");
+		
 
 		$("#firstImage").removeAttr("id");
 		var mask = $("#filter-mask");
@@ -97,6 +98,15 @@ function modalOffSet() {
 	$myDialog.css('top',  (viewportHeight/2)+ $(document).scrollTop());
 }
 
+function arrowOffSet() {
+	// Get the window viewport height
+	viewportHeight = $(window).height();
+	// cache your dialog element
+	$myDialog = $('.arrowContainer');
+	// now set your dialog position
+	$myDialog.css('top',  (viewportHeight/2)+ $(document).scrollTop());
+}
+
 function changeType(thePic) {
 
 	console.log(thePic);
@@ -112,6 +122,8 @@ function changeType(thePic) {
 function popPicture(thePicture) {
 
 	showModal("picture");
+	$(".arrows").show();
+	$(".arrows").css("display", "block");
 	changeType(thePicture[0]);	
 	
 	$("#biggerImage").attr('src', thePicture.attr('data-full-path'));
@@ -144,6 +156,8 @@ function clickPicture() {
 			$(".modalPicture").removeClass("mobileDiv");
 
 			$(".current").removeClass("current");
+			$(".arrows").hide();
+			$(".arrows").css("display", "none");
 			closeModal("picture");
 		}
 		
@@ -200,14 +214,48 @@ function modalMobileReady() {
 	}
 }
 
+function goLeft(imageToChange, prev) {
+
+	imageToChange.fadeOut(100, function(){
+
+	  	imageToChange.one('load', function(){
+	  		imageToChange.fadeIn(200);
+	  		changeType(prev);
+	  		modalMobileReady();	
+	  	}).attr('src', prev.getAttribute('data-full-path'));
+	  	
+	  	$(".current").removeClass("current");
+	  	prev.className += " current";
+
+	  });
+
+}
+
+function goRight(imageToChange, next) {
+
+	imageToChange.fadeOut(100, function(){
+
+		imageToChange.one('load', function(){
+			imageToChange.fadeIn(200);
+			changeType(next);
+			modalMobileReady();
+		}).attr('src', next.getAttribute('data-full-path'));
+		
+		$(".current").removeClass("current");
+  		next.className += " current";
+	});
+		  	
+}
 
 function modalControl() {
 
 	var imageToChange = $("#biggerImage");
 	var modal = $(".modalPicture");
 	
-	$("html").keydown(function(event) {
 
+	$(".arrows").click(function(){
+		
+		//Setup Variables - next - prev
 		var selectedDiv = $(".current");
 		var next;
 		var prev;
@@ -222,41 +270,47 @@ function modalControl() {
 			prev = selectedDiv.parent().prev(".selected").children()[0];
 		} else {
 			prev = $(".selected:last").children()[0];
-		}		
+		}
 
-		if (event.keyCode == 37) {
-		  //move to the left
-		  imageToChange.fadeOut(100, function(){
+		if ($(this).attr('id') == "left") {
+			//Go Left
+			goLeft(imageToChange, prev);
+		} else {
+			//Go Right
+			goRight(imageToChange, next);
+		}
+	});
 
-		  	imageToChange.one('load', function(){
-		  		imageToChange.fadeIn(200);
-		  		changeType(prev);
-		  		modalMobileReady();	
-		  	}).attr('src', prev.getAttribute('data-full-path'));
-		  	
-		  	$(".current").removeClass("current");
-		  	prev.className += " current";
+	
+	$("html").keydown(function(event) {
 
-		  });
-		 
+		//Setup Variables - next - prev
+		var selectedDiv = $(".current");
+		var next;
+		var prev;
+		
+		if (selectedDiv.parent().next(".selected").length) {
+			next = selectedDiv.parent().next(".selected").children()[0];
+		} else {
+			next = $(".selected:first").children()[0];
+		}
 
+		if (selectedDiv.parent().prev(".selected").length) {
+			prev = selectedDiv.parent().prev(".selected").children()[0];
+		} else {
+			prev = $(".selected:last").children()[0];
+		}
+
+
+		if (event.keyCode == 37) { 
+		  //move to the left		 
+		  goLeft(imageToChange, prev);
+		
 		} else if (event.keyCode == 39) {
-			
-			imageToChange.fadeOut(100, function(){
-
-				imageToChange.one('load', function(){
-					imageToChange.fadeIn(200);
-					changeType(next);
-					modalMobileReady();
-				}).attr('src', next.getAttribute('data-full-path'));
-				
-				$(".current").removeClass("current");
-		  		next.className += " current";
-			});
-		  	
-		  	
+		  	goRight(imageToChange, next);
 		}
 	})
+	
 }
 /* Called once before the page even finishes loading all elements to make sure it displays correct height */
 adjustHeight();
