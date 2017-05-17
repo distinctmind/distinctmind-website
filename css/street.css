@@ -3,23 +3,19 @@ body,html {
   background-color: black;
  /* max-width: 100%;*/
   overflow-x: hidden;
+  overflow-y: auto !important;
 
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+
+  /*NEW*/
+  background-color: rgba(0,0,0,1);
+  -webkit-background-clip: text;
+  transition: background-color .8s;
 }
 
-.site-wrapper {
-  position: static;
-  /* overflow-y: scroll; */
-  overflow-x: hidden !important;
-  /*max-width: 100% !important;*/
-  height: 100vh;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  /* z-index: 0; */
-}
+
 /*Animation for opacity transition of images on page load */
 @keyframes animateImages {
   0% {
@@ -35,6 +31,18 @@ header {
 	width: 100%;
 	height: 100px;
 
+}
+
+.site-wrapper {
+  position: static;
+  /* overflow-y: scroll; */
+  overflow-x: hidden !important;
+  /*max-width: 100% !important;*/
+  height: 100vh;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /* z-index: 0; */
 }
 
 .arrowContainer {
@@ -277,7 +285,7 @@ header img {
 	position: relative;
   display: inline-block;
   margin-left: 1%;
-  height: 100%;
+  height: 94%;
   padding: 0;
 
 }
@@ -343,6 +351,37 @@ header .navBar a:hover {
   overflow: hidden;
   
 }
+body:hover {
+  background-color: rgba(255,255,255,1);  
+}
+
+body::-webkit-scrollbar {
+  width: 5px;
+}
+body::-webkit-scrollbar-track {
+  display: none;
+}
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: inherit;
+}
+
+/*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 20px rgba(255,255,255,0); 
+  border-radius: 10px;
+  display: none;
+}*/
+
+/*::-webkit-scrollbar-thumb {
+  
+  border-radius: 10px;
+  background-color: inherit;
+  -webkit-box-shadow: inset 0 0 20px rgba(255,255,255,1); 
+}*/
+
+.hide-scrollbar {
+  background-color: rgba(255,255,255,0) !important;
+}
 
 .container .image-div {
 
@@ -365,8 +404,12 @@ header .navBar a:hover {
   margin: 0 0.5% 50px 2.2%;
   position: relative !important;
   float: left !important;
-  width: 100%;
-  height: 100%;
+  /*height: 100%;*/
+  height: auto;
+}
+
+.container .image-div.about {
+  margin-left: 0px;
 }
 .container .image-div.about p {
   color: white;
@@ -462,8 +505,8 @@ header .navBar a:hover {
     max-width: 30%;
   }
 
-  #about {
-    max-width: 93.4%;
+  #aboutDiv {
+    min-width: 92.4%;
   }
 
   .container .image-div.videos {
@@ -485,7 +528,8 @@ header .navBar a:hover {
   }
 
   .container .image-div.about {
-    max-width: 93%;
+    /*max-width: 93%;*/
+    width: 93%;
   }
 
   header #logo {

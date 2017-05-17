@@ -1,9 +1,32 @@
+function setContainerHeight(amount) {
+
+	var selectedDivs = $(".selected");
+	var totalHeight = 0;
+
+	for (var i = 0; i < selectedDivs.length/amount; i++) {
+		totalHeight += selectedDivs[i].clientHeight + 50;
+	}
+	$(".container").css("height", String(totalHeight) + "px");
+}
+
+function setContainerLeft() {
+	
+	var landscapeWidth = $(".selected")[0].clientWidth;
+
+	if (window.innerWidth >= 1200) {
+		$(".container").css("left", String(($(window).width()-(landscapeWidth*3+40)))/2+"px");
+	} else if (window.innerWidth > 750 && window.innerWidth < 1200) {
+		$(".container").css("left", String(($(window).width()-(landscapeWidth*2+20)))/2+"px");
+	} else {
+		$(".container").css("left", String(($(window).width()-(landscapeWidth)))/2+"px");
+	}
+}
+
 function setLeft() {
 	
 	var selectedDivs = $(".selected");
-	var landscapeWidth = $(".selected")[0].clientWidth;
 	var selectedDivsImg = selectedDivs.children();
-	var windowWidth = $(window).width();
+	var windowWidth = window.innerWidth;
 	
 	var leftAmount = 0;
 	var topAmount = 0;
@@ -33,17 +56,11 @@ function setLeft() {
 
 		}
 
-		$(".container").css("left", String(($(window).width()-(landscapeWidth*3+40)))/2+"px");
-
-	} else if (windowWidth >= 750 && windowWidth < 1200) {
+	} else if (windowWidth > 750 && windowWidth < 1200) {
 		
 		for (var i = 0; i < $(".selected").length; i++) {
 
-			if (windowWidth >= 750 && windowWidth < 1200) {
-				$(".container").css("left", String(($(window).width()-(landscapeWidth*2+20)))/2+"px");
-			}
 			largestHeight = Math.max(selectedDivs[i].clientHeight, largestHeight);
-
 			leftAmount = (i % 2)*(selectedDivs[i].clientWidth + 20);
 			
 			if (i >= 2 && selectedDivs[i-2]) {
@@ -74,8 +91,8 @@ function setLeft() {
 				largestHeight = 0;
 			}
 		}
-		$(".container").css("left", String(($(window).width()-(landscapeWidth*2+20)))/2+"px");
-	} else if (windowWidth < 750) {
+	
+	} else if (windowWidth <= 750) {
 
 		for (var i = 0; i < $(".selected").length; i++) {
 
@@ -84,13 +101,15 @@ function setLeft() {
 					largestHeight = selectedDivs[i].clientHeight;
 				}
 			}
+			topAmount = i && rowHeight;
 			rowHeight +=  selectedDivs[i].clientHeight + 30;
-			topAmount = (i*(selectedDivs[i].clientHeight + 50));
+
 			selectedDivs[i].style.top = String(topAmount) + "px";
 			selectedDivs[i].style.left = 0;
 		}
-		$(".container").css("left", String(($(window).width()-(landscapeWidth)))/2+"px");
+		
 	}
+	setContainerLeft();
 	$(".container").css("height", String(rowHeight) + "px");
 }
 
@@ -105,6 +124,8 @@ function adjustHeight(type) {
 	if (selectedDivsImg[0].getAttribute('id') == 'me') {		
 		$("#me").parent()[0].style.display = "inline-block";
 		$("#me").parent()[0].style.left = "0px";
+		$(".container").css("left", String((window.innerWidth-($("#aboutDiv").width()+20)))/2+"px");
+		setContainerHeight(1);
 	} else {
 
 		$("#firstImage").parent()[0].style.display = "inline-block";
@@ -141,20 +162,33 @@ function adjustHeight(type) {
 			}
 		}
 		
-
 		//**** ALL of the above can be done with these three lines of code: ****
 		//$(".container .landscape").css('height', currentLandscapeHeight);
 		//$(".container .videos").css('height', currentLandscapeHeight);
 		//$(".container .portrait").css('height', $("#firstPortrait img").height());
 		
-		if (type != "videos" && type != "about") {
-			setLeft();
-		} else {
-			$(".container").css("left", "0px");
-			$(".container").css("height", "115vh");
-		} 
+		if (type == "videos") {
 
-		if ($(window).width() >= 750 && $(window).width() < 1200) {
+			var landscapeWidth = $(".selected")[0].clientWidth;
+
+			if (window.innerWidth <= 750) {
+				//$(".container .videos").css("margin-left", "0px");
+				$(".container").css("left", String(($(window).width()-(landscapeWidth+20)))/2+"px");
+				setContainerHeight(1);
+				
+			} else {
+				setContainerHeight(2);
+				//$(".container .videos").css("margin-left", "2.2%");
+				$(".container").css("left", String(($(window).width()-(landscapeWidth*2+40)))/2+"px");
+			} 
+			$(".container").css("left", "0px");
+			
+
+		} else {
+			setLeft();
+		}
+
+		if ($(window).width() > 750 && $(window).width() < 1200) {
 			var portraitHeight = (currentLandscapeHeight*2) + 30;
 			$("#thirdPortrait").css('height', portraitHeight);
 		}
@@ -608,13 +642,27 @@ $(document).ready(function(){
 	$(window).resize(function() {
   		
   		//For height of gallery pictures
-  		adjustHeight($(".selected").attr('class').split(' ').slice(-1)[0]);
+  		adjustHeight($(".selected").attr('id'));
   		//For dynamix resizing
   		modalMobileReady();
   		//For hiding and showing burger/nav bar
   		showNav();
   		
 	});
+
+	$( window ).scroll(function() { 
+	  //Show scrollbar 
+	  $('body').removeClass('hide-scrollbar');
+
+	  // Check if we are still scrolling, else hide scrollbar
+	  clearTimeout($.data(this, 'scrollTimer'));
+	  $.data(this, 'scrollTimer', setTimeout(function() {
+	    // Scrollevent not happened, hiding Scrollbar
+	    $('body').addClass('hide-scrollbar');
+	  }, 350));
+
+	});
+
 
 	showNav();
 
