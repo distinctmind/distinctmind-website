@@ -18,3 +18,8 @@ Images/landing/03.jpg
 Images/landing/01.jpg
 
 .DS_Store
+*.png
+*.gif
+*.psd
+*.jpg
+Images/.DS_Store

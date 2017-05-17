@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	$(".border").click(function(){
+		window.location.href = "street/street.html";
+	});
+	
 	$("#photos div:gt(0)").hide();
 
 	setInterval(function(){

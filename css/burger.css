@@ -1,0 +1,65 @@
+#burger {
+  z-index: 8;
+  display: none;
+  position: absolute;
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  right: 3.5%;
+  top: 40px;
+  border-radius: 5px;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+#burger .icon {
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  position: absolute;
+  height: 4px;
+  width: 30px;
+  /*top: 30px;*/
+  top: 24px;
+  background-color: #212121;
+  border-radius: 4px;
+  /*left: 15px;*/
+  left: 10px;
+}
+#burger .icon:before {
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  position: absolute;
+  width: 30px;
+  height: 4px;
+  background-color: #212121;
+  content: "";
+  top: -10px;
+  border-radius: 4px;
+}
+#burger .icon:after {
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  position: absolute;
+  width: 30px;
+  height: 4px;
+  background-color: #212121;
+  content: "";
+  top: 10px;
+  border-radius: 4px;
+}
+#burger.open .icon {
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  background: transparent;
+}
+#burger.open .icon:before {
+  -webkit-transform: rotateZ(45deg) scaleX(1.25) translate(6.5px, 6.5px);
+          transform: rotateZ(45deg) scaleX(1.25) translate(6.5px, 6.5px);
+}
+#burger.open .icon:after {
+  -webkit-transform: rotateZ(-45deg) scaleX(1.25) translate(6px, -6px);
+          transform: rotateZ(-45deg) scaleX(1.25) translate(6px, -6px);
+}
+#burger:hover {
+  background: #fff;
+  cursor: pointer;
+}
