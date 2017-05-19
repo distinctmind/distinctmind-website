@@ -33,6 +33,7 @@ body,html {
   }
   .hide-scrollbar {
     background-color: rgba(255,255,255,0) !important;
+
   }
 }
 
@@ -444,6 +445,7 @@ header .navBar a:hover {
 
 #firstImage {
 	height: auto;
+  /*opacity: 0;*/
 }
 
 #firstPortrait {
@@ -451,7 +453,7 @@ header .navBar a:hover {
   margin-bottom: 10px;
 }
 
-#me {
+.me {
   position: relative;
   cursor: default;
   width: 100%;

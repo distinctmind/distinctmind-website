@@ -6,19 +6,21 @@ function setContainerHeight(amount) {
 	for (var i = 0; i < selectedDivs.length/amount; i++) {
 		totalHeight += selectedDivs[i].clientHeight + 50;
 	}
+	console.log("Total height is: " + String(totalHeight));
 	$(".container").css("height", String(totalHeight) + "px");
 }
 
 function setContainerLeft() {
 	
 	var landscapeWidth = $(".selected")[0].clientWidth;
+	var windowWidth = window.innerWidth;
 
-	if (window.innerWidth >= 1200) {
-		$(".container").css("left", String(($(window).width()-(landscapeWidth*3+40)))/2+"px");
+	if (windowWidth >= 1200) {
+		$(".container").css("left", String((windowWidth-(landscapeWidth*3+40)))/2+"px");
 	} else if (window.innerWidth > 750 && window.innerWidth < 1200) {
-		$(".container").css("left", String(($(window).width()-(landscapeWidth*2+20)))/2+"px");
+		$(".container").css("left", String((windowWidth-(landscapeWidth*2+20)))/2+"px");
 	} else {
-		$(".container").css("left", String(($(window).width()-(landscapeWidth)))/2+"px");
+		$(".container").css("left", String((windowWidth-(landscapeWidth)))/2+"px");
 	}
 }
 
@@ -26,6 +28,7 @@ function setLeft() {
 	
 	var selectedDivs = $(".selected");
 	var selectedDivsImg = selectedDivs.children();
+	var imageWidth = selectedDivsImg[0].clientWidth;
 	var windowWidth = window.innerWidth;
 	
 	var leftAmount = 0;
@@ -39,19 +42,29 @@ function setLeft() {
 		for (var i = 0; i < selectedDivs.length; i++) {
 			
 			if (selectedDivsImg[i].hasAttribute('data-type')) {
+
 				if (selectedDivsImg[i].getAttribute('data-type') == 'portrait') {
+					//console.log("portrait image");
 					largestHeight = selectedDivs[i].clientHeight;
 				}
 			}
 			
-			leftAmount = (i % 3)*(selectedDivs[i].clientWidth + 20);
+			leftAmount = (i % 3)*(imageWidth + 20);
 			topAmount = (Math.floor(i/3)*(rowHeight+50));
+
+			//console.log("left amount is: " + String(leftAmount));
+			//console.log("top amount is: " + String(rowHeight));
+			//console.log("");
 			selectedDivs[i].style.top = String(rowHeight) + "px";
 			
 			if ((i+1)%3 == 0 || selectedDivs[i].getAttribute('id') == 'about') {
+				//console.log("Third image");
 				rowHeight +=  selectedDivsImg[i].clientHeight + 30;
+				//console.log("Row height is: " + String(rowHeight));
+				//console.log("");
 			}
-	
+			//console.log("Row height is: " + String(rowHeight));
+			//console.log("");
 			selectedDivs[i].style.left = String(leftAmount) + "px";
 
 		}
@@ -61,12 +74,12 @@ function setLeft() {
 		for (var i = 0; i < $(".selected").length; i++) {
 
 			largestHeight = Math.max(selectedDivs[i].clientHeight, largestHeight);
-			leftAmount = (i % 2)*(selectedDivs[i].clientWidth + 20);
+			leftAmount = (i % 2)*(imageWidth + 20);
 			
 			if (i >= 2 && selectedDivs[i-2]) {
 
 				if (selectedDivs[i-2].getAttribute('id') == 'thirdPortrait') {
-					leftAmount = (i+1 % 2)*(selectedDivsImg[i].clientWidth + 20);
+					leftAmount = (i+1 % 2)*(imageWidth + 20);
 				}
 			}
 
@@ -120,17 +133,26 @@ function adjustHeight(type) {
 	
 	var selectedDivs = $(".selected");
 	var selectedDivsImg = selectedDivs.children();
+
+
+	//var firstImage = $(".image-div" + "." + type + " img")[0];
+	var firstImage = selectedDivsImg[0];
+	var firstPortrait = $("#firstPortrait img")[0];
+	var currentLandscapeHeight = firstImage.clientHeight;
+	var currentPortraitHeight = firstPortrait.clientHeight;
+	
+	console.log("IN adjust height");
+	console.log("landscape height is " + String(currentLandscapeHeight));
 	//Make sure the first image div can be displayed
-	if (selectedDivsImg[0].getAttribute('id') == 'me') {		
-		$("#me").parent()[0].style.display = "inline-block";
-		$("#me").parent()[0].style.left = "0px";
+	if (selectedDivsImg[0].getAttribute('class') == 'me') {		
+		$(".me").parent()[0].style.left = "0px";
 		$(".container").css("left", String((window.innerWidth-($("#aboutDiv").width()+20)))/2+"px");
 		setContainerHeight(1);
 	} else {
 
-		$("#firstImage").parent()[0].style.display = "inline-block";
+		//$("#firstImage").parent()[0].style.display = "inline-block";
 		$("#firstImage").parent()[0].style.left = "0px";
-		var currentLandscapeHeight = $("#firstImage").height();
+		
 		//Go through all selected elements
 		for (var i = 0; i < selectedDivs.length; i++) {
 			
@@ -144,10 +166,10 @@ function adjustHeight(type) {
 					//Since rest of portaits are based on first portrait
 					if (selectedDivs[i].getAttribute('id') == 'firstPortrait') {
 						$("#firstPortrait").css("left", "0px");
-						$("#firstPortrait").css("display", "inline-block");
 					} else {
-						selectedDivs[i].style.height = String($("#firstPortrait img").height()) + "px";
-						selectedDivs[i].style.display =  "inline-block";
+						console.log("portrait height is " + String(currentPortraitHeight));
+						selectedDivs[i].style.height = String(currentPortraitHeight) + "px";
+						selectedDivs[i].style.display =  "block";
 					}
 				//Video - treat as landscape
 				} else {
@@ -158,7 +180,7 @@ function adjustHeight(type) {
 			//Landscape
 			} else {
 				selectedDivs[i].style.height = String(currentLandscapeHeight) + "px";
-				selectedDivs[i].style.display =  "inline-block";
+				selectedDivs[i].style.display =  "block";
 			}
 		}
 		
@@ -185,6 +207,12 @@ function adjustHeight(type) {
 			
 
 		} else {
+			console.log("AAAA");
+			for (var i = 0; i < selectedDivs.length; i++) {
+				console.log(selectedDivsImg[i].clientHeight);
+			}
+			console.log("");
+
 			setLeft();
 		}
 
@@ -288,15 +316,15 @@ function changePictures() {
 function showPictures(theFilter) {
 
 	var images = $(theFilter);
-
-	for (var i = 0; i < images.length; i++) {
+	
+	for (var i = 1; i < images.length; i++) {
 		images[i].src = images[i].getAttribute('data-src');
 	}
+	$("#firstImage").parent().css("opacity", "1.0");
 }
 
 function changeView(filter) {
-
-	showPictures(".image-div" + "." + filter + " img");
+	
 		
 	$("#firstImage").removeAttr("id");
 	var mask = $("#filter-mask");
@@ -306,27 +334,47 @@ function changeView(filter) {
 	var firstParent = $(newSelector).first();
 	var firstChild = firstParent.children();
 	
-	//No need to add first image tag to about section
-	if (filter != "about") {
-		firstChild.attr("id", "firstImage");
-	} 
-
 	setTimeout(function(){
+
+		//No need to add first image tag to about section
+		firstChild[0].setAttribute("id", "firstImage");
+		
 		$(".image-div").removeClass("selected");
 		$(".image-div").css("display", "none");
 		$(newSelector).addClass("selected");
 		
 		//OLD
-		//firstParent.css("display", "block");
+		firstParent.css("opacity", "0");
+		firstParent.css("display", "block");
+		firstChild[0].src = firstChild[0].getAttribute('data-src');
+
+		if (filter == "faces") {
+
+			$("#firstPortrait").css("display", "block");
+			$("#firstPortrait img")[0].src = $("#firstPortrait img")[0].getAttribute('data-src');
+		}
+		
+		setTimeout(function(){
+			console.log("BEFORE ADJSUT HEIGHT");
+		console.log(firstChild);
+		console.log(firstChild[0].offsetHeight);
+		console.log("");
+		adjustHeight(filter);
+
+		showPictures(".image-div" + "." + filter + " img");
+		$(".filter-mask").removeClass("filter-mask");
 
 		closeModal("menu");
-		//adjustHeight();
+		}, 400);
+		
+
+		
 	}, 100);
 
-	setTimeout(function(){
-		adjustHeight(filter);
-		$(".filter-mask").removeClass("filter-mask");
-	}, 500);
+	// setTimeout(function(){
+	// 	showPictures(".image-div" + "." + filter + " img");
+	// 	$(".filter-mask").removeClass("filter-mask");
+	// }, 500);
 }
 
 
@@ -625,16 +673,29 @@ function modalControl() {
 	
 }
 /* Called once before the page even finishes loading all elements to make sure it displays correct height */
-adjustHeight("none");
+// adjustHeight($(".selected").attr('id'));
 
-if ($("#firstImage").parent().height() == 0) {
-	adjustHeight("none");
-}
+// if ($("#firstImage").parent().height() == 0) {
+// 	adjustHeight($(".selected").attr('id'));
+// }
 
 
 $(document).ready(function(){
 
-	adjustHeight("none");
+	$(".selected")[0].style.display = "block";	
+	$(".selected img")[0].src = $(".selected img")[0].getAttribute('data-src');
+
+	setTimeout(function(){
+		console.log("BEFORE ADJSUT HEIGHT");
+	console.log($(".selected img")[0].offsetHeight);
+	console.log("");
+	adjustHeight($(".selected").attr('id'));
+	$("#firstImage").css("opacity", "1.0");
+
+	}, 100);
+
+	
+	
 	filterImages();
 	clickPicture();
 	modalControl();
@@ -652,6 +713,7 @@ $(document).ready(function(){
 
 	$( window ).scroll(function() { 
 	  //Show scrollbar 
+
 	  $('body').removeClass('hide-scrollbar');
 
 	  // Check if we are still scrolling, else hide scrollbar
