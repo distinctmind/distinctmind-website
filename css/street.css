@@ -1,14 +1,20 @@
 body,html {
 	
   background-color: black;
- /* max-width: 100%;*/
- margin: 0;
+  /* max-width: 100%;*/
+  margin: 0;
   overflow-x: hidden;
-  overflow-y: auto !important;
 
   /*-webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;*/
+}
+
+.lock {
+  height: 100%;
+  overflow-y: hidden;
+  width: 100%;
+  position: absolute;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -60,24 +66,12 @@ header {
   overflow-x: hidden;
 }
 
-.arrowContainer {
-  display: none;
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  z-index: 1000;
-  margin:0;
-  padding: 0;
-  top: 0;
-  left: 0;
-}
-
 .arrows, #close {
   width: 35px;
   height: 35px;
   position: fixed;
   display: none;
-  z-index: 2000;
+  z-index: 120;
   cursor: pointer;
 }
 
@@ -113,15 +107,19 @@ header {
   top: 0;
   left: 0;
   position: fixed;
-  z-index: 999;
+  z-index: 100;
   overflow: hidden;
   background-color: black;
 }
 
 .modal.menu ul {
-  position: relative;
+  position: absolute;
   margin: 0 auto;
-  top: 25%;
+  left: 50%;
+  padding: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -159,12 +157,12 @@ header {
 }
 
 .modal.picture {
-  z-index: 9;
+  /* z-index: 2000;*/
 }
 
 .modalPicture {
 
-  z-index: 999;
+  z-index: 110;
   position: fixed;
   height: 95vh;
   /*width: 100%;*/
@@ -180,7 +178,7 @@ header {
 
 .modalVideo {
   width: 90%;
-  z-index: 999;
+  z-index: 120;
   position: relative;
   display: none;
   overflow: hidden;
@@ -294,6 +292,10 @@ header {
 
 }
 
+header #burger {
+  z-index: 100;
+}
+
 header img {
 
 	position: relative;
@@ -374,7 +376,7 @@ header .navBar a:hover {
   /*margin: 0 0.5% 50px 2.2%;*/
   position: absolute;
 
-	height: 246.92px;
+	/*height: 246.92px;*/
 	overflow: hidden;
 
 	background-position: 50% 50%;
@@ -389,20 +391,6 @@ header .navBar a:hover {
   position: relative !important;
   float: left !important;
   height: auto;
-}
-
-.container .image-div.about {
-  margin-left: calc(7%/2);
-  margin-left: -webkit-calc(7%/2);
-  margin-left: -o-calc(7%/2);
-  margin-left: -moz-calc(7%/2);
-}
-
-.container .image-div.videos.first {
-  margin-left: calc( (9.2% - 20px)/2);
-  margin-left: -webkit-calc((9.2% - 20px)/2);
-  margin-left: -o-calc((9.2% - 20px)/2);
-  margin-left: -moz-calc((9.2% - 20px)/2);
 }
 
 
@@ -451,8 +439,7 @@ header .navBar a:hover {
 	height: auto;
   /*opacity: 0;*/
 }
-
-#firstPortrait {
+.firstPortrait {
   height: auto;
   margin-bottom: 10px;
   opacity: 0;
@@ -536,6 +523,12 @@ header .navBar a:hover {
 
 }
 
+@media (max-width: 1050px) {
+  .container .image-div.videos {
+    width: 93%;
+  }
+}
+
 
 @media (max-width: 917px) {
   .navBar {
@@ -560,16 +553,16 @@ header .navBar a:hover {
     width: 93%;
   }
 
-  .container .image-div.videos.first {
+  /*.container .image-div.videos.first {
     margin-left: calc(7%/2);
     margin-left: -webkit-calc(7%/2);
     margin-left: -o-calc(7%/2);
     margin-left: -moz-calc(7%/2);
-  }
+  }*/
   .container .image-div.about {
     max-width: 93%;
   }
-  #firstPortrait {
+  .firstPortrait {
     margin-bottom: 50px;
   }
 }

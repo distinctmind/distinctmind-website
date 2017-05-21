@@ -1,11 +1,10 @@
 #burger {
-  z-index: 8;
+  z-index: 1999;
   display: none;
   position: absolute;
   background: #fff;
   width: 50px;
   height: 50px;
-  right: 3.5%;
   top: 40px;
   border-radius: 5px;
   -webkit-transition-duration: 0.5s;

@@ -26,11 +26,11 @@
 		<div class="modal menu">
 
 			<ul>
-				<a id="street" class="filter-options" href="#">STREET</a><br>
+				<a id="street" data-index="0" class="filter-options" href="#">STREET</a><br>
 
 				<a id="land" class="filter-options" href="#">LAND</a><br>
 
-				<a id="faces" class="filter-options" href="#">FACES</a><br>
+				<a id="faces" data-index="1" class="filter-options" href="#">FACES</a><br>
 
 				<a id="videos" class="filter-options" href="#">VIDEOS</a><br>
 
@@ -47,11 +47,11 @@
 		<!-- Main nav bar -->
 		<ul class="navBar">
 				
-			<a class="filter-options" id="street" href="#">STREET</a>
+			<a class="filter-options" data-index=0 id="street" href="#">STREET</a>
 
 			<a class="filter-options" id="land" href="#">LAND</a>				
 
-			<a class="filter-options" id="faces" href="#">FACES</a>				
+			<a class="filter-options" data-index=1 id="faces" href="#">FACES</a>				
 
 			<a class="filter-options" id="videos" href="#">VIDEOS</a>
 			
@@ -83,7 +83,7 @@
 	<div class="container filtered">
 		
 		<!-- STREET Pictures - Initially Selected -->
-		<div class="image-div street selected landscape" id="firstStreet">
+		<div class="image-div street selected landscape" id="firstStreet" data-index=0>
 			<img class="three-columns" id="firstImage" src="../Images/street/01.jpg" data-full-path="../Images/street/full/01.jpg" data-src="../Images/street/01.jpg"/>
 		</div>
 
@@ -105,6 +105,30 @@
 
 		<div class="image-div street selected landscape">
 			<img class="three-columns" src="../Images/street/06.jpg" data-full-path="../Images/street/full/06.jpg" data-src="../Images/street/06.jpg"/>
+		</div>
+
+		<div class="image-div street selected landscape firstPortrait" data-index=0>
+			<img class="three-columns" src="../Images/street/07.jpg" data-type="portrait" data-full-path="../Images/street/full/07.jpg" data-src="../Images/street/07.jpg"/>
+		</div>
+
+		<div class="image-div street selected landscape">
+			<img class="three-columns" data-type="portrait" src="../Images/street/09.jpg" data-full-path="../Images/street/full/09.jpg" data-src="../Images/street/09.jpg"/>
+		</div>
+
+		<div class="image-div street selected landscape thirdPortrait">
+			<img class="three-columns" data-type="portrait" src="../Images/street/08.jpg" data-full-path="../Images/street/full/08.jpg" data-src="../Images/street/08.jpg"/>
+		</div>
+
+		<div class="image-div street selected landscape">
+			<img class="three-columns" src="../Images/street/10.jpg" data-full-path="../Images/street/full/10.jpg" data-src="../Images/street/10.jpg"/>
+		</div>
+
+		<div class="image-div street selected landscape">
+			<img class="three-columns" src="../Images/street/11.jpg" data-full-path="../Images/street/full/11.jpg" data-src="../Images/street/11.jpg"/>
+		</div>
+
+		<div class="image-div street selected landscape">
+			<img class="three-columns" src="../Images/street/12.jpg" data-full-path="../Images/street/full/12.jpg" data-src="../Images/street/12.jpg"/>
 		</div>
 
 		<!-- LAND Pictures  -->
@@ -158,7 +182,7 @@
 		</div>
 
 
-		<div class="image-div faces" id="firstPortrait">
+		<div class="image-div faces firstPortrait" data-index="1">
 			<img class="three-columns" data-type="portrait" data-full-path="../Images/faces/full/07.jpg" data-src="../Images/faces/medium/07.jpg"/>
 		</div>
 
@@ -166,7 +190,7 @@
 			<img class="three-columns" data-type="portrait" data-full-path="../Images/faces/full/08.jpg" data-src="../Images/faces/medium/08.jpg"/>
 		</div>
 
-		<div class="image-div faces portrait" id="thirdPortrait">
+		<div class="image-div faces portrait thirdPortrait">
 			<img class="three-columns" data-type="portrait" data-full-path="../Images/faces/full/09.jpg" data-src="../Images/faces/medium/09.jpg"/>
 		</div>
 

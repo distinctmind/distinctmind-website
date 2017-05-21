@@ -4,7 +4,7 @@ function setContainerHeight(amount) {
 	var totalHeight = 0;
 
 	for (var i = 0; i < selectedDivs.length/amount; i++) {
-		totalHeight += selectedDivs[i].clientHeight + 50;
+		totalHeight += selectedDivs[i].clientHeight + 30;
 	}
 	$(".container").css("height", String(totalHeight) + "px");
 }
@@ -31,10 +31,8 @@ function setLeft() {
 			if (selectedDivsImg[i].hasAttribute('data-type')) {
 
 				if (selectedDivsImg[i].getAttribute('data-type') == 'portrait') {
-					console.log("Portrait Image!");
-					console.log("Portrait Height: " + String(selectedDivs[i].clientHeight));
-					console.log("");
 					largestHeight = selectedDivs[i].clientHeight;
+					//rowHeight += largestHeight;
 				}
 			}
 			
@@ -43,7 +41,7 @@ function setLeft() {
 
 			selectedDivs[i].style.top = String(rowHeight) + "px";
 			
-			if ((i+1)%3 == 0 || selectedDivs[i].getAttribute('id') == 'about') {
+			if ((i+1)%3 == 0 || selectedDivs[i].getAttribute('id') == 'about' || i+1== selectedDivs.length) {
 				rowHeight +=  selectedDivsImg[i].clientHeight + 30;
 			}
 			selectedDivs[i].style.left = String(leftAmount) + "px";
@@ -54,14 +52,14 @@ function setLeft() {
 		
 	} else if (windowWidth > 750 && windowWidth < 1200) {
 		
-		for (var i = 0; i < $(".selected").length; i++) {
+		for (var i = 0; i < selectedDivs.length; i++) {
 
 			largestHeight = Math.max(selectedDivs[i].clientHeight, largestHeight);
 			leftAmount = (windowWidth-(imageWidth*2+20))/2 + (i % 2)*(imageWidth + 20);
 			
 			if (i >= 2 && selectedDivs[i-2]) {
 
-				if (selectedDivs[i-2].getAttribute('id') == 'thirdPortrait') {
+				if (selectedDivs[i-2].classList.contains('thirdPortrait')) {
 					leftAmount = (windowWidth-(imageWidth*2+20))/2 + (i+1 % 2)*(imageWidth + 20);
 				}
 			}
@@ -72,7 +70,7 @@ function setLeft() {
 					
 					largestHeight = selectedDivs[i].clientHeight;
 
-					if (selectedDivs[i].getAttribute('id') == 'thirdPortrait') {
+					if (selectedDivs[i].classList.contains('thirdPortrait')) {
 						largestHeight = 0;
 					}
 				}
@@ -82,7 +80,7 @@ function setLeft() {
 			selectedDivs[i].style.left = String(leftAmount) + "px";
 			selectedDivs[i].style.top = String(rowHeight) + "px";
 
-			if ((i+1)%2 == 0) {
+			if ((i+1)%2 == 0 || i+1== selectedDivs.length) {
 				rowHeight += largestHeight + 30;
 				largestHeight = 0;
 			}
@@ -93,9 +91,7 @@ function setLeft() {
 	
 	} else if (windowWidth <= 750) {
 
-		console.log("Smaller than 750");
-
-		for (var i = 0; i < $(".selected").length; i++) {
+		for (var i = 0; i < selectedDivs.length; i++) {
 
 			if (selectedDivsImg[i].hasAttribute('data-type')) {
 				if (selectedDivsImg[i].getAttribute('data-type') == 'portrait') {
@@ -118,27 +114,28 @@ function setLeft() {
 /* Used to continually adjust the fixed height of each div upon window resize */
 /* Note this doesn't change the size of the first div because every other div's height is based on the first one. */
 
-function adjustHeight(type) {
+function adjustHeight(type, index) {
 	
 	var selectedDivs = $(".selected");
 	var selectedDivsImg = selectedDivs.children();
 
-
 	var firstImage = selectedDivsImg[0];
-	var firstPortrait = $("#firstPortrait img")[0];
+	var firstPortrait = $(".firstPortrait img")[index];
+	var currentPortraitHeight = 0;
+	if (firstPortrait) {
+		currentPortraitHeight = firstPortrait.clientHeight;
+	}
 	var currentLandscapeHeight = firstImage.clientHeight;
-	var currentPortraitHeight = firstPortrait.clientHeight;
-
-
 	
-	console.log("In adjust height");
-	console.log("landscape height is " + String(currentLandscapeHeight));
-	console.log("portrait height is " + String(currentPortraitHeight));
-	console.log("");
+	var currentWindowWidth = window.innerWidth;
 
 	//Make sure the first image div can be displayed
 	if (selectedDivsImg[0].getAttribute('class') == 'me') {		
 		//$(".me").parent()[0].style.left = String((window.innerWidth-($("#aboutDiv").width()+20)))/2+"px";
+		$("#logo").css("margin-left", String( (currentWindowWidth-(firstImage.clientWidth))/2 + "px"));
+		$(".navBar").css("right", String((currentWindowWidth-(firstImage.clientWidth))/2 - (currentWindowWidth - ($("body").width())) + "px"));
+		$("#burger").css("right", String((currentWindowWidth-(firstImage.clientWidth))/2 - (currentWindowWidth - ($("body").width())) + "px"));
+		$("#aboutDiv").css("margin-left", String( (currentWindowWidth - $("#aboutDiv").width())/2) + "px");
 		setContainerHeight(1);
 	} else {
 		
@@ -150,7 +147,7 @@ function adjustHeight(type) {
 				
 				//Portrait
 				if (selectedDivsImg[i].getAttribute('data-type') == 'portrait') {
-					if (selectedDivs[i].getAttribute('id') == 'firstPortrait') {
+					if (selectedDivs[i].classList.contains('firstPortrait')) {
   					} else {							
 						selectedDivs[i].style.height = String(currentPortraitHeight) + "px";
 						selectedDivs[i].style.display =  "block";
@@ -172,54 +169,94 @@ function adjustHeight(type) {
 		//$(".container .landscape").css('height', currentLandscapeHeight);
 		//$(".container .videos").css('height', currentLandscapeHeight);
 		//$(".container .portrait").css('height', $("#firstPortrait img").height());
-		
+		var theWindow = window.innerWidth;
+
 		if (type == "videos") {
 
-			if (window.innerWidth <= 750) {
-				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 + "px"));
+			if (theWindow <= 1050) {
+
+				$("#logo").css("margin-left", String( (theWindow-(firstImage.clientWidth))/2 + "px"));
+				$(".first").css("margin-left", String( (theWindow - $(".first").width())/2) + "px");
+				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth))/2 - (theWindow - ($("body").width())) + "px"));
+				$("#burger").css("right", String((theWindow-(firstImage.clientWidth))/2 - (theWindow - ($("body").width())) + "px"));
 				setContainerHeight(1);
 				
 			} else {
+				$("#logo").css("margin-left", String((theWindow-(firstImage.clientWidth*2+20))/2 + "px"));
+				$(".first").css("margin-left", String( (theWindow - ($(".first").width()*2) - 20)/2) + "px");
+				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth*2+20))/2 - (theWindow - ($("body").width())) + "px"));
+				$("#burger").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 - (theWindow - ($("body").width())) + "px"));
 				setContainerHeight(2);
-				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth))/2 + "px"));
 			} 
 			
 		} else {
 
-			setLeft();
-			var theWindow = $(window).width();
-		
+
+
 			if (theWindow >= 1200) {
+				if (selectedDivs.length % 2 != 0) {
+					selectedDivs[selectedDivs.length-1].style.width = "30%";		
+				}
 				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*3+40))/2 - (theWindow - ($("body").width())) + "px"));
 			} else if (theWindow > 750 && theWindow < 1200) {
+				
 				var portraitHeight = (currentLandscapeHeight*2) + 30;
-				$("#thirdPortrait").css('height', portraitHeight);
-				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 + "px"));
+				
+				if (selectedDivs.length % 2 != 0) {
+
+					selectedDivs[selectedDivs.length-1].style.height = "auto";
+					selectedDivs[selectedDivs.length-1].style.width = String(theWindow- (theWindow - 2*firstImage.clientWidth - 20)) + "px";
+					
+				}
+
+				if ($(".thirdPortrait")[index]) {
+					$(".thirdPortrait")[index].style.height = String(portraitHeight) + "px";
+				}
+				
+				$("#burger").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 - (theWindow - ($("body").width())) + "px"));
+				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 - (theWindow - ($("body").width())) + "px"));
 			} else {
-				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth))/2 + "px"));
+				selectedDivs[selectedDivs.length-1].style.width = "93%";
+				$("#burger").css("right", String( (theWindow-(firstImage.clientWidth))/2 - (theWindow - ($("body").width())) + "px"));
+				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth))/2 - (theWindow - ($("body").width())) + "px"));
 			}
+			setLeft();
 		}
 
 
 	}
 }
 
+function closeModal(mode) {
+	
+	$(".modal" + "." + mode).hide();
+	$(".modal" + "." + mode).css('display', 'none');
+	$("#burger").css("z-index", "100");
+	if (mode == "picture") {
+		$(".modalPicture").css('display', 'none');
+		$(".modal.picture").hide();
+		$(".modal.picture").css('display', 'none');
+	} else if (mode == "video") {
+		$(".modalVideo").css('display', 'none');
+	}
+	$("html").removeClass('lock');
+}
+
 function showNav() {
 
-	if ($(window).width() <= 917) {
-			
+	var windowWidth = window.innerWidth;
+
+	if (windowWidth <= 917) {
+		$(".modal.menu").css("opacity", "1");
 		$("header .navBar").fadeOut(300);
-		
-		$("#burger").removeClass("open");
 		$("#burger").css("display", "block");
 		
-		// if ($(window).width() <= 750) {
-		// 	changePictures();
-		// }
 	} else {
+		$(".modal.menu").css("opacity", "0");
 		$("header .navBar").fadeIn(300);
+		//$("#burger").removeClass("open");
 		$("#burger").hide();
-		$("#burger").css("display", "none");
+		
 	}
 }
 
@@ -253,37 +290,21 @@ var videoSource = {
 
 function showModal(mode) {
 
-	$(".modal.picture").show();
-	//$(".modal.picture").css('display', 'block');
 
 	if (mode == "picture") {
+		$(".modal.picture").show();
 		$(".modalPicture").css('display', 'block');
 	} else if (mode == "video") {
 		$(".modalVideo").css('display', 'block');
 	} else if (mode == "about") {
 		$(".modalAbout").css('display', 'block');
 	} else {
-		$("#burger").css("z-index", "999");
+		$("#burger").css("z-index", "120");
 		var newFilter = ".modal." + mode;
 		$(newFilter).css("display", "block");
 	}
-	$("html").css('overflow-y', 'hidden');
-}
-
-function closeModal(mode) {
+	$("html").addClass('lock');
 	
-	$("#burger").css("z-index", "8");
-
-	$(".modal" + "." + mode).hide();
-	$(".modal" + "." + mode).css('display', 'none');
-	
-	$(".modalPicture").css('display', 'none');
-	$(".modal.picture").hide();
-	$(".modal.picture").css('display', 'none');
-	$(".modalVideo").css('display', 'none');
-	$(".modalAbout").css('display', 'none');
-
-	$("html").css('overflow-y', 'visible');
 }
 
 function changePictures() {
@@ -293,21 +314,28 @@ function changePictures() {
 	});
 
 }
+function loadImage(image) {
+	var loadImage = new Image();
+	loadImage.onload = function(){
+		image.src = image.getAttribute('data-src');
+	}
+	loadImage.src = image.getAttribute('data-src');
+}
 
 function showPictures(theFilter) {
 
 	var images = $(theFilter);
 	
 	for (var i = 1; i < images.length; i++) {
-		images[i].src = images[i].getAttribute('data-src');
+		loadImage(images[i]);
 	}
 	if (theFilter == ".image-div.faces img") {
-		$("#firstPortrait").css("opacity", "1.0");
+		$(".firstPortrait").css("opacity", "1.0");
 	}
 	$("#firstImage").parent().css("opacity", "1.0");
 }
 
-function changeView(filter) {
+function changeView(filter, index) {
 	
 		
 	$("#firstImage").removeAttr("id");
@@ -325,46 +353,57 @@ function changeView(filter) {
 		$(".image-div").removeClass("selected");
 		$(".image-div").css("display", "none");
 		$(newSelector).addClass("selected");
+		$(newSelector)[0].setAttribute('data-index', index);
+		$(newSelector)[0].dataset.index = index;
 		
 		//OLD
 		firstParent.css("opacity", "0");
 		firstParent.css("display", "block");
 
 		firstChild[0].src = firstChild[0].getAttribute('data-src');
-
-		if (filter == "faces") {
-			$("#firstPortrait").css("display", "block");
-			$("#firstPortrait img")[0].src = $("#firstPortrait img")[0].getAttribute('data-src');
-		}
 		
 		var loadImage = new Image();
  		loadImage.src = firstChild[0].src;
 
   		loadImage.onload = function(){
-   			 // hide loader code here
-   			console.log("done");
-			adjustHeight(filter);
+
+  			//If there is a portrait image also make sure image is loaded before calling adjust height
+  			if (typeof index != 'undefined') {
+
+				$(".firstPortrait")[index].style.display = "block";
+				$(".firstPortrait img")[index].src = $(".firstPortrait img")[index].getAttribute('data-src');
+				//$(".firstPortrait img")[0].src = $("#firstPortrait img")[0].getAttribute('data-src');
+
+				var loadPortrait = new Image();
+				loadPortrait.src = $(".firstPortrait img")[index].src;
+
+				loadPortrait.onload = function() {
+					adjustHeight(filter, index);
+				}
+
+			} else {
+				adjustHeight(filter, index);
+			}
 			showPictures(".image-div" + "." + filter + " img");
 			$(".filter-mask").removeClass("filter-mask");
 			closeModal("menu");
+			if (filter == "videos") {
+				closeModal("video");
+			}
  		}
 		
 	}, 100);
 
-	// setTimeout(function(){
-	// 	showPictures(".image-div" + "." + filter + " img");
-	// 	$(".filter-mask").removeClass("filter-mask");
-	// 	closeModal("menu");
-	// }, 500);
 }
 
 
 function filterImages() {
 
 	$(".filter-options").click(function(){
+		
 		var filter = $(this).attr("id");
 		$("#burger").removeClass("open");
-		changeView(filter);
+		changeView(filter, $(this).data("index"));
 		//var stateObj = { street: filter };
 		//history.pushState(stateObj, filter, filter + ".html");
 	});	
@@ -412,7 +451,7 @@ function popPicture(thePicture) {
 		setTimeout(function(){
 			$(".selected").css("display", "none");
 			$(".selected").removeClass("selected");
-			$(".modalVideo").css("display","block");
+			showModal("video");
 		}, 100);
 
 		setTimeout(function(){
@@ -432,11 +471,7 @@ function popPicture(thePicture) {
 		$(".arrows").show();
 		$(".arrows").css("display", "block");
 		changeType(thePicture[0]);
-
-		$("#biggerImage").attr('src', thePicture.attr('data-full-path'));
-		$("#biggerImage").one("load",function(){modalMobileReady()});
 	
-
 		$("#biggerImage").one('load', function(){
 			modalMobileReady();
 		}).attr('src', thePicture.attr('data-full-path'));
@@ -508,52 +543,49 @@ function clickPicture() {
 
 }
 
+function goMobile(image, div) {
+	image.addClass("mobile");
+	div.css('min-width', '');
+	div.addClass("mobileDiv");
+}
+
+function goWide(image, div) {
+	image.removeClass("mobile");
+	div.removeClass("mobileDiv");			
+	div.css('min-width', String(image.width()) + "px");
+}
+
 
 function modalMobileReady() {
 
 	var image = $("#biggerImage");
-	var imageWidth = $("#biggerImage").width();
+	var imageWidth = $("#biggerImage")[0].clientWidth;
 	var div = $(".modalPicture");
+	var windowWidth = window.innerWidth;
 	var type = "";
 
+	goWide(image, div);
+	var breakpoint = image[0].clientWidth + 58;
+
+	//For portrait images
 	if (image.attr("data-type")) {
 		type = image.attr("data-type");
 	}
 
 	if (type == "portrait") {
 
-		if ($(window).width() <= 475) {
-			
-			image.addClass("mobile");
-			div.css('min-width', '');
-			div.addClass("mobileDiv");
-
+		if (windowWidth <= breakpoint) {
+			goMobile(image, div);
 		} else {
-
-			image.removeClass("mobile");
-			div.removeClass("mobileDiv");
-			
-			var modalWidth = imageWidth;
-			div.css('min-width', String(modalWidth) + "px");
-
+			goWide(image, div);
 		}
 
 	} else {
-
-		if ($(window).width() <= 880) {
-			
-			image.addClass("mobile");
-			div.css('min-width', '');
-			div.addClass("mobileDiv");
-
+		
+		if (windowWidth <= breakpoint) {
+			goMobile(image, div);
 		} else {
-
-			image.removeClass("mobile");
-			div.removeClass("mobileDiv");
-			
-			var modalWidth = imageWidth;
-			div.css('min-width', String(modalWidth) + "px");
-
+			goWide(image, div);
 		}
 	}
 }
@@ -666,15 +698,22 @@ $(document).ready(function(){
 	$(".selected")[0].style.display = "block";
 	$(".selected img")[0].src = $(".selected img")[0].getAttribute('data-src');
 
+	$(".firstPortrait")[0].style.display = "block";
+	$(".firstPortrait img")[0].src = $(".firstPortrait img")[0].getAttribute('data-src');
+
 	var loadImage = new Image();
  	loadImage.src = $(".selected img")[0].src;
 
   	loadImage.onload = function(){
-  		console.log("BEFORE ADJUST HEIGHT");
-		console.log($(".selected img")[0].offsetHeight);
-		console.log("");
-		adjustHeight($(".selected").attr('id'));
-		$("#firstImage").css("opacity", "1.0");
+  		
+  		var loadPortrait = new Image();
+		loadPortrait.src = $(".firstPortrait img")[0].src;
+
+		loadPortrait.onload = function() {
+			adjustHeight($(".selected").attr('id'), 0);
+			$("#firstImage").css("opacity", "1.0");
+			$(".firstPortrait")[0].style.opacity = "1.0";
+		}
   	}
 	
 	filterImages();
@@ -684,7 +723,7 @@ $(document).ready(function(){
 	$(window).resize(function() {
   		
   		//For height of gallery pictures
-  		adjustHeight($(".selected").attr('id'));
+  		adjustHeight($(".selected").attr('id'), $(".selected")[0].getAttribute("data-index"));
   		//For dynamix resizing
   		modalMobileReady();
   		//For hiding and showing burger/nav bar
