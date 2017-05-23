@@ -16,7 +16,7 @@ function setLeft() {
 	var selectedDivs = $(".selected");
 	var selectedDivsImg = selectedDivs.children();
 	var imageWidth = selectedDivsImg[0].clientWidth;
-	var windowWidth = window.innerWidth;
+	var windowWidth = document.documentElement.clientWidth;
 	
 	var leftAmount = 0;
 	var topAmount = 0;
@@ -35,7 +35,7 @@ function setLeft() {
 					//rowHeight += largestHeight;
 				}
 			}
-			
+
 			leftAmount = (windowWidth-(imageWidth*3+40))/2 + (i % 3)*(imageWidth + 20);
 			//topAmount = (Math.floor(i/3)*(rowHeight+50));
 
@@ -121,20 +121,21 @@ function adjustHeight(type, index) {
 
 	var firstImage = selectedDivsImg[0];
 	var firstPortrait = $(".firstPortrait img")[index];
+	
 	var currentPortraitHeight = 0;
+	var currentLandscapeHeight = firstImage.clientHeight;	
+	var currentWindowWidth = document.documentElement.clientWidth;
+
 	if (firstPortrait) {
 		currentPortraitHeight = firstPortrait.clientHeight;
 	}
-	var currentLandscapeHeight = firstImage.clientHeight;
-	
-	var currentWindowWidth = window.innerWidth;
 
 	//Make sure the first image div can be displayed
 	if (selectedDivsImg[0].getAttribute('class') == 'me') {		
-		//$(".me").parent()[0].style.left = String((window.innerWidth-($("#aboutDiv").width()+20)))/2+"px";
+		//$(".me").parent()[0].style.left = String((document.documentElement.clientWidth-($("#aboutDiv").width()+20)))/2+"px";
 		$("#logo").css("margin-left", String( (currentWindowWidth-(firstImage.clientWidth))/2 + "px"));
-		$(".navBar").css("right", String((currentWindowWidth-(firstImage.clientWidth))/2 - (currentWindowWidth - ($("body").width())) + "px"));
-		$("#burger").css("right", String((currentWindowWidth-(firstImage.clientWidth))/2 - (currentWindowWidth - ($("body").width())) + "px"));
+		$(".navBar").css("right", String((currentWindowWidth-(firstImage.clientWidth))/2 + "px"));
+		$("#burger").css("right", String((currentWindowWidth-(firstImage.clientWidth))/2 + "px"));
 		$("#aboutDiv").css("margin-left", String( (currentWindowWidth - $("#aboutDiv").width())/2) + "px");
 		setContainerHeight(1);
 	} else {
@@ -169,7 +170,8 @@ function adjustHeight(type, index) {
 		//$(".container .landscape").css('height', currentLandscapeHeight);
 		//$(".container .videos").css('height', currentLandscapeHeight);
 		//$(".container .portrait").css('height', $("#firstPortrait img").height());
-		var theWindow = window.innerWidth;
+		var theWindow = document.documentElement.clientWidth;
+		var scrollWidth = 0;
 
 		if (type == "videos") {
 
@@ -177,15 +179,15 @@ function adjustHeight(type, index) {
 
 				$("#logo").css("margin-left", String( (theWindow-(firstImage.clientWidth))/2 + "px"));
 				$(".first").css("margin-left", String( (theWindow - $(".first").width())/2) + "px");
-				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth))/2 - (theWindow - ($("body").width())) + "px"));
-				$("#burger").css("right", String((theWindow-(firstImage.clientWidth))/2 - (theWindow - ($("body").width())) + "px"));
+				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth))/2) + "px");
+				$("#burger").css("right", String((theWindow-(firstImage.clientWidth))/2) + "px");
 				setContainerHeight(1);
 				
 			} else {
-				$("#logo").css("margin-left", String((theWindow-(firstImage.clientWidth*2+20))/2 + "px"));
+				$("#logo").css("margin-left", String( (theWindow-(firstImage.clientWidth*2+20))/2) + "px");
 				$(".first").css("margin-left", String( (theWindow - ($(".first").width()*2) - 20)/2) + "px");
-				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth*2+20))/2 - (theWindow - ($("body").width())) + "px"));
-				$("#burger").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 - (theWindow - ($("body").width())) + "px"));
+				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth*2+20))/2) + "px");
+				$("#burger").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2) + "px");
 				setContainerHeight(2);
 			} 
 			
@@ -197,7 +199,7 @@ function adjustHeight(type, index) {
 				if (selectedDivs.length % 2 != 0) {
 					selectedDivs[selectedDivs.length-1].style.width = "30%";		
 				}
-				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*3+40))/2 - (theWindow - ($("body").width())) + "px"));
+				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*3+40))/2 + "px"));
 			} else if (theWindow > 750 && theWindow < 1200) {
 				
 				var portraitHeight = (currentLandscapeHeight*2) + 30;
@@ -213,12 +215,12 @@ function adjustHeight(type, index) {
 					$(".thirdPortrait")[index].style.height = String(portraitHeight) + "px";
 				}
 				
-				$("#burger").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 - (theWindow - ($("body").width())) + "px"));
-				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 - (theWindow - ($("body").width())) + "px"));
+				$("#burger").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 + "px"));
+				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 + "px"));
 			} else {
 				selectedDivs[selectedDivs.length-1].style.width = "93%";
-				$("#burger").css("right", String( (theWindow-(firstImage.clientWidth))/2 - (theWindow - ($("body").width())) + "px"));
-				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth))/2 - (theWindow - ($("body").width())) + "px"));
+				$("#burger").css("right", String( (theWindow-(firstImage.clientWidth))/2 + "px"));
+				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth))/2 + "px"));
 			}
 			setLeft();
 		}
@@ -244,14 +246,17 @@ function closeModal(mode) {
 
 function showNav() {
 
-	var windowWidth = window.innerWidth;
+	var windowWidth = document.documentElement.clientWidth;
 
 	if (windowWidth <= 917) {
+		$("header").addClass("fixedNav");
+		$(".container").css("top", "100px");
 		$(".modal.menu").css("opacity", "1");
 		$("header .navBar").fadeOut(300);
 		$("#burger").css("display", "block");
 		
 	} else {
+		$("header").removeClass("fixedNav");
 		$(".modal.menu").css("opacity", "0");
 		$("header .navBar").fadeIn(300);
 		//$("#burger").removeClass("open");
@@ -402,6 +407,9 @@ function filterImages() {
 	$(".filter-options").click(function(){
 		
 		var filter = $(this).attr("id");
+		$(".default").removeClass("not");
+		$('.default').removeClass('default');
+		$(this).children().children().addClass('default');
 		$("#burger").removeClass("open");
 		changeView(filter, $(this).data("index"));
 		//var stateObj = { street: filter };
@@ -561,7 +569,7 @@ function modalMobileReady() {
 	var image = $("#biggerImage");
 	var imageWidth = $("#biggerImage")[0].clientWidth;
 	var div = $(".modalPicture");
-	var windowWidth = window.innerWidth;
+	var windowWidth = document.documentElement.clientWidth;
 	var type = "";
 
 	goWide(image, div);
@@ -695,6 +703,18 @@ function modalControl() {
 
 $(document).ready(function(){
 
+	$(".three-d").hover(function(){
+
+		if (!($(this).children().children()[0].classList.contains('default'))) {
+			$(".default").addClass("not");
+		}
+		$(this).children().children().addClass("it");
+	}, function(){
+		$(".default").parent().removeClass("transform");
+		$(".default").removeClass("not");
+		$(this).children().children().removeClass("it");
+	});
+
 	$(".selected")[0].style.display = "block";
 	$(".selected img")[0].src = $(".selected img")[0].getAttribute('data-src');
 
@@ -715,7 +735,7 @@ $(document).ready(function(){
 			$(".firstPortrait")[0].style.opacity = "1.0";
 		}
   	}
-	
+	showNav();
 	filterImages();
 	clickPicture();
 	modalControl();
@@ -731,22 +751,19 @@ $(document).ready(function(){
   		
 	});
 
-	$( window ).scroll(function() { 
-	  //Show scrollbar 
+	// $( window ).scroll(function() { 
+	//   //Show scrollbar 
 
-	  $('body').removeClass('hide-scrollbar');
+	//   $('body').removeClass('hide-scrollbar');
 
-	  // Check if we are still scrolling, else hide scrollbar
-	  clearTimeout($.data(this, 'scrollTimer'));
-	  $.data(this, 'scrollTimer', setTimeout(function() {
-	    // Scrollevent not happened, hiding Scrollbar
-	    $('body').addClass('hide-scrollbar');
-	  }, 350));
+	//   // Check if we are still scrolling, else hide scrollbar
+	//   clearTimeout($.data(this, 'scrollTimer'));
+	//   $.data(this, 'scrollTimer', setTimeout(function() {
+	//     // Scrollevent not happened, hiding Scrollbar
+	//     $('body').addClass('hide-scrollbar');
+	//   }, 350));
 
-	});
-
-
-	showNav();
+	// });
 
 	$('#burger').click (function(){
   		
@@ -757,19 +774,5 @@ $(document).ready(function(){
   		}
   		$(this).toggleClass('open');
 	});
-
-	jQuery(".titleWrapper").addClass("ready");
 	
-	jQuery(".titleWrapper a").each(function(){
-		var fullString;
-		var characters = jQuery(this).text().split("");
-		
-		$this = jQuery(this);
-		$this.empty();
-		$.each(characters, function (i, el) {
-			if(el == " "){el = "&nbsp;"};
-	    $this.append("<span>" + el + "</span");
-		});
-			
-	});
 });
