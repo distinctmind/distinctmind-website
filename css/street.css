@@ -329,20 +329,22 @@ header .navBar {
 
 }
 
+.titleWrapper {
+  position: relative;
+  margin-left: 2.1%;
+  text-align: center;
+  height: 35px;
+  overflow: hidden;
+  width: 20.6%;
+}
 header .navBar a {
 
-	margin-left: 2.1%;
-  /*width: 13.6%;*/
-  width: 20.6%;
-  height: 35px;
   cursor: pointer;
 
   background-color: white;
   display: inline-block;
   text-decoration: none;
   color: black;
-
-  border-bottom: 1px solid transparent;
 
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -352,11 +354,32 @@ header .navBar a {
 
 }
 
-header .navBar a:hover {
-  background-color: black;
-  color: white;
-  border-bottom: 1px solid white;
+header .navBar .titleWrapper a {
+  width: 100%;
 }
+
+.navBar a span {
+  position: relative;
+  display: inline-block;
+  transform: translateY(100%);
+  transition: all 0.25s cubic-bezier(0.65, 0, 0.21, 1.47) 0s;
+}
+
+.titleWrapper.ready a span {
+  transform: translateY(0%);
+}
+
+.navBar a.first span {
+  background: white;
+  position: relative;
+  z-index: 5;
+}
+
+.navBar a.second span {
+  position: relative;
+  z-index: 1;
+}
+
 
 .container {
   /*OLD*/

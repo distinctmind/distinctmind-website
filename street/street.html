@@ -6,6 +6,7 @@
 	<title>Distinct Mind</title>
 
 	<link rel="stylesheet" type="text/css" href="../css/street.css">
+	<link rel="stylesheet" type="text/css" href="../css/navElement.css">
 	<link rel="stylesheet" type="text/css" href="../css/burger.css">
 	<link href="https://fonts.googleapis.com/css?family=Chivo:400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Oswald:400,500" rel="stylesheet">
@@ -46,16 +47,26 @@
 
 		<!-- Main nav bar -->
 		<ul class="navBar">
-				
-			<a class="filter-options" data-index=0 id="street" href="#">STREET</a>
-
-			<a class="filter-options" id="land" href="#">LAND</a>				
-
-			<a class="filter-options" data-index=1 id="faces" href="#">FACES</a>				
-
-			<a class="filter-options" id="videos" href="#">VIDEOS</a>
 			
-			<a class="filter-options" id="about" href="#">ABOUT</a>
+			<div class="titleWrapper">
+				<a class="filter-options first" data-index=0 id="street" href="#">STREET</a> <a class="filter-options second" data-index=0 href="#">RUE</a>
+			</div>
+
+			<div class="titleWrapper">
+				<a class="filter-options first" id="land" href="#">LAND</a><a class="filter-options second" id="land" href="#">TERRAIN</a>	
+			</div>
+
+			<div class="titleWrapper">
+				<a class="filter-options first" data-index=1 id="faces" href="#">FACES</a><a class="filter-options second" id="faces" data-index=1 href="#">VISAGES</a>	
+			</div>
+
+			<div class="titleWrapper">
+				<a class="filter-options first" id="videos" href="#">VIDEOS</a><a class="filter-options second" id="videos" href="#">FILM</a>	
+			</div>
+
+			<div class="titleWrapper">
+				<a class="filter-options first" id="about" href="#">ABOUT</a><a class="filter-options second" id="about" href="#">CONTACT</a>	
+			</div>
 
 		</ul>
 

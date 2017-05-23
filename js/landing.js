@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$(".border").click(function(){
+	$("#enter").click(function(){
 		window.location.href = "street/street.html";
 	});
 	

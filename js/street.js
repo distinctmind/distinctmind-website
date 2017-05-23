@@ -757,5 +757,19 @@ $(document).ready(function(){
   		}
   		$(this).toggleClass('open');
 	});
+
+	jQuery(".titleWrapper").addClass("ready");
+	
+	jQuery(".titleWrapper a").each(function(){
+		var fullString;
+		var characters = jQuery(this).text().split("");
 		
+		$this = jQuery(this);
+		$this.empty();
+		$.each(characters, function (i, el) {
+			if(el == " "){el = "&nbsp;"};
+	    $this.append("<span>" + el + "</span");
+		});
+			
+	});
 });

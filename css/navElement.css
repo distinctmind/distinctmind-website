@@ -1,0 +1,159 @@
+a.first span:nth-of-type(1) {
+  transition-delay: 0.02s;
+}
+
+a.second span:nth-of-type(1) {
+  transition-delay: 0.08s;
+}
+
+a.first span:nth-of-type(2) {
+  transition-delay: 0.04s;
+}
+
+a.second span:nth-of-type(2) {
+  transition-delay: 0.11s;
+}
+
+a.first span:nth-of-type(3) {
+  transition-delay: 0.06s;
+}
+
+a.second span:nth-of-type(3) {
+  transition-delay: 0.14s;
+}
+
+a.first span:nth-of-type(4) {
+  transition-delay: 0.08s;
+}
+
+a.second span:nth-of-type(4) {
+  transition-delay: 0.17s;
+}
+
+a.first span:nth-of-type(5) {
+  transition-delay: 0.1s;
+}
+
+a.second span:nth-of-type(5) {
+  transition-delay: 0.2s;
+}
+
+a.first span:nth-of-type(6) {
+  transition-delay: 0.12s;
+}
+
+a.second span:nth-of-type(6) {
+  transition-delay: 0.23s;
+}
+
+a.first span:nth-of-type(7) {
+  transition-delay: 0.14s;
+}
+
+a.second span:nth-of-type(7) {
+  transition-delay: 0.26s;
+}
+
+a.first span:nth-of-type(8) {
+  transition-delay: 0.16s;
+}
+
+a.second span:nth-of-type(8) {
+  transition-delay: 0.29s;
+}
+
+a.first span:nth-of-type(9) {
+  transition-delay: 0.18s;
+}
+
+a.second span:nth-of-type(9) {
+  transition-delay: 0.32s;
+}
+
+a.first span:nth-of-type(10) {
+  transition-delay: 0.2s;
+}
+
+a.second span:nth-of-type(10) {
+  transition-delay: 0.35s;
+}
+
+a.first span:nth-of-type(11) {
+  transition-delay: 0.22s;
+}
+
+a.second span:nth-of-type(11) {
+  transition-delay: 0.38s;
+}
+
+a.first span:nth-of-type(12) {
+  transition-delay: 0.24s;
+}
+
+a.second span:nth-of-type(12) {
+  transition-delay: 0.41s;
+}
+
+a.first span:nth-of-type(13) {
+  transition-delay: 0.26s;
+}
+
+a.second span:nth-of-type(13) {
+  transition-delay: 0.44s;
+}
+
+a.first span:nth-of-type(14) {
+  transition-delay: 0.28s;
+}
+
+a.second span:nth-of-type(14) {
+  transition-delay: 0.47s;
+}
+
+a.first span:nth-of-type(15) {
+  transition-delay: 0.3s;
+}
+
+a.second span:nth-of-type(15) {
+  transition-delay: 0.5s;
+}
+
+a.first span:nth-of-type(16) {
+  transition-delay: 0.32s;
+}
+
+a.second span:nth-of-type(16) {
+  transition-delay: 0.53s;
+}
+
+a.first span:nth-of-type(17) {
+  transition-delay: 0.34s;
+}
+
+a.second span:nth-of-type(17) {
+  transition-delay: 0.56s;
+}
+
+a.first span:nth-of-type(18) {
+  transition-delay: 0.36s;
+}
+
+a.second span:nth-of-type(18) {
+  transition-delay: 0.59s;
+}
+
+a.first span:nth-of-type(19) {
+  transition-delay: 0.38s;
+}
+
+a.second span:nth-of-type(19) {
+  transition-delay: 0.62s;
+}
+
+.titleWrapper.ready:hover a.first span {
+  transform: translateY(100%);
+}
+
+.titleWrapper.ready:hover a.second span {
+  transform: translateY(-90%);
+}
