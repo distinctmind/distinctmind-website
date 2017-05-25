@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+	<title>LAND</title>
+
+	<link rel="stylesheet" type="text/css" href="../css/work.css">
+	<link rel="stylesheet" type="text/css" href="../css/navElement.css">
+	<link rel="stylesheet" type="text/css" href="../css/burger.css">
+	<link href="https://fonts.googleapis.com/css?family=Chivo:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oswald:400,500" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width">
+
+
+</head>
+
+<body>
+
+	<header>
+
+		<a href="../"><img id="logo" src="../Images/header/dmlogo2.png"></a>
+		
+		<!-- Main Modal menu that appears when user clicks the burger -->
+		<div class="modal menu">
+
+			<ul>
+				<a id="street" data-type="street" data-index="0" class="filter-options">STREET</a><br>
+
+				<a id="land" data-type="land" class="filter-options">LAND</a><br>
+
+				<a id="faces" data-type="faces" data-index="1" class="filter-options">FACES</a><br>
+
+				<a id="clients" data-type="twoCol" class="filter-options">CLIENTS</a><br>
+
+				<a id="videos" data-type="twoCol" class="filter-options">VIDEOS</a><br>
+
+				<a id="about" data-type="about" class="filter-options">ABOUT</a><br>
+			</ul>
+
+		</div>
+
+		<div id="burger" data-menu="15">
+        	<div class="icon"></div>
+      	</div>
+
+		<ul class="navBar">
+			<li>
+				<a id="street" data-type="street" class="filter-options three-d" data-index=0>STREET
+						<span aria-hidden="true" class="three-d-box">
+							<span class="front">STREET</span>
+							<span class="back">STREET</span>
+						</span>
+				</a>
+			</li>
+			<li>
+				<a id="land" data-type="land" class="filter-options three-d">
+					LAND
+						<span aria-hidden="true" class="three-d-box">
+							<span class="front default">LAND</span>
+							<span class="back default">LAND</span>
+						</span>
+				</a>
+			</li>
+			<li><a id="faces" data-type="faces" class="filter-options three-d" data-index=1>
+				FACES
+				<span aria-hidden="true" class="three-d-box">
+					<span class="front">FACES</span>
+					<span class="back">FACES</span>
+				</span>
+			</a></li>
+
+			<li><a id="clients" data-type="twoCol" class="filter-options three-d" data-index=2>
+				CLIENTS
+				<span aria-hidden="true" class="three-d-box">
+					<span class="front">CLIENTS</span>
+					<span class="back">CLIENTS</span>
+				</span>
+			</a></li>
+
+			<li><a id="videos" data-type="twoCol" class="filter-options three-d">
+				VIDEOS
+				<span aria-hidden="true" class="three-d-box">
+					<span class="front">VIDEOS</span>
+					<span class="back">VIDEOS</span>
+				</span>
+			</a></li>
+
+			<li><a id="about" data-type="about" class="filter-options three-d">
+				ABOUT
+				<span aria-hidden="true" class="three-d-box">
+					<span class="front">ABOUT</span>
+					<span class="back">ABOUT</span>
+				</span>
+			</a></li>
+		</ul>
+	</header>
+
+	<img id="left" class="arrows" src="../Images/modal/left.png">
+	<img id="right" class="arrows" src="../Images/modal/right.png">
+	<img id="close" src="../Images/modal/close.png">
+
+	<!-- Picture that stands over the black full-screen modal -->
+	<div class="modalPicture">
+		<img id="biggerImage">
+	</div>	
+
+	<div class="modalVideo">
+		<h2 id="back">GO BACK</h2>
+		<h1 class="videoTitle"></h1>
+		<iframe class="videoSource" src="" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+	</div>
+
+	<!-- Black Full-screen modal -->
+	<div class="modal picture">
+	</div>
+
+	<div class="container filtered">
+
+		<!-- STREET Pictures - Initially Selected -->
+		<div class="image-div street landscape" id="firstStreet" data-index=0 data-portrait=0 data-identifier="street">
+			<img class="three-columns" src="../Images/street/01.jpg" data-full-path="../Images/street/full/01.jpg" data-src="../Images/street/01.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" src="../Images/street/02.jpg" data-full-path="../Images/street/full/02.jpg" data-src="../Images/street/02.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" src="../Images/street/03.jpg" data-full-path="../Images/street/full/03.jpg" data-src="../Images/street/03.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" src="../Images/street/04.jpg" data-full-path="../Images/street/full/04.jpg" data-src="../Images/street/04.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" src="../Images/street/05.jpg" data-full-path="../Images/street/full/05.jpg" data-src="../Images/street/05.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" src="../Images/street/06.jpg" data-full-path="../Images/street/full/06.jpg" data-src="../Images/street/06.jpg"/>
+		</div>
+
+		<div class="image-div street landscape firstPortrait" data-index=0>
+			<img class="three-columns" src="../Images/street/07.jpg" data-type="portrait" data-full-path="../Images/street/full/07.jpg" data-src="../Images/street/07.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" data-type="portrait" src="../Images/street/09.jpg" data-full-path="../Images/street/full/09.jpg" data-src="../Images/street/09.jpg"/>
+		</div>
+
+		<div class="image-div street landscape thirdPortrait">
+			<img class="three-columns" data-type="portrait" src="../Images/street/08.jpg" data-full-path="../Images/street/full/08.jpg" data-src="../Images/street/08.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" src="../Images/street/10.jpg" data-full-path="../Images/street/full/10.jpg" data-src="../Images/street/10.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" src="../Images/street/11.jpg" data-full-path="../Images/street/full/11.jpg" data-src="../Images/street/11.jpg"/>
+		</div>
+
+		<div class="image-div street landscape">
+			<img class="three-columns" src="../Images/street/12.jpg" data-full-path="../Images/street/full/12.jpg" data-src="../Images/street/12.jpg"/>
+		</div>
+
+		<!-- LAND Pictures  -->
+		<div class="image-div land selected landscape" id="firstLand" data-identifier="land">
+			<img class="three-columns" id="firstImage" data-full-path="../Images/land/full/02.jpg" src="../Images/land/full/02.jpg" data-src="../Images/land/full/02.jpg"/>
+		</div>
+
+		<div class="image-div land selected landscape">
+			<img class="three-columns" data-full-path="../Images/land/full/01.jpg" src="../Images/land/full/01.jpg" data-src="../Images/land/01.jpg"/>
+		</div>
+
+		<div class="image-div land selected landscape">
+			<img class="three-columns" data-full-path="../Images/land/full/03.jpg" src="../Images/land/full/03.jpg" data-src="../Images/land/03.jpg"/>
+		</div>
+
+		<div class="image-div land selected landscape">
+			<img class="three-columns" data-full-path="../Images/land/full/04.jpg" src="../Images/land/full/04.jpg" data-src="../Images/land/04.jpg"/>
+		</div>
+
+		<div class="image-div land selected landscape">
+			<img class="three-columns" data-full-path="../Images/land/full/05.jpg" src="../Images/land/full/05.jpg" data-src="../Images/land/05.jpg"/>
+		</div>
+
+		<div class="image-div land selected landscape">
+			<img class="three-columns" data-full-path="../Images/land/full/06.jpg" src="../Images/land/full/06.jpg" data-src="../Images/land/06.jpg"/>
+		</div>
+
+		<!-- PORTRAIT PICTURES -->
+		<div class="image-div faces landscape" data-portrait=1 data-identifier="faces">
+			<img class="three-columns" data-full-path="../Images/faces/full/01.jpg" data-src="../Images/faces/medium/01.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns" data-full-path="../Images/faces/full/02.jpg" data-src="../Images/faces/medium/02.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns" data-full-path="../Images/faces/full/03.jpg" data-src="../Images/faces/medium/03.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns" data-full-path="../Images/faces/full/04.jpg" data-src="../Images/faces/medium/04.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns" data-full-path="../Images/faces/full/05.jpg" data-src="../Images/faces/medium/05.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns" data-full-path="../Images/faces/full/06.jpg" data-src="../Images/faces/medium/06.jpg"/>
+		</div>
+
+
+		<div class="image-div faces firstPortrait" data-index="1">
+			<img class="three-columns" data-type="portrait" data-full-path="../Images/faces/full/07.jpg" data-src="../Images/faces/medium/07.jpg"/>
+		</div>
+
+		<div class="image-div faces portrait">
+			<img class="three-columns" data-type="portrait" data-full-path="../Images/faces/full/08.jpg" data-src="../Images/faces/medium/08.jpg"/>
+		</div>
+
+		<div class="image-div faces portrait thirdPortrait">
+			<img class="three-columns" data-type="portrait" data-full-path="../Images/faces/full/09.jpg" data-src="../Images/faces/medium/09.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns" data-full-path="../Images/faces/full/10.jpg" data-src="../Images/faces/medium/10.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns"  data-full-path="../Images/faces/full/11.jpg" data-src="../Images/faces/medium/11.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns"  data-full-path="../Images/faces/full/12.jpg" data-src="../Images/faces/medium/12.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns"  data-full-path="../Images/faces/full/13.jpg" data-src="../Images/faces/medium/13.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns"  data-full-path="../Images/faces/full/14.jpg" data-src="../Images/faces/medium/14.jpg"/>
+		</div>
+
+		<div class="image-div faces landscape">
+			<img class="three-columns"  data-full-path="../Images/faces/full/15.jpg" data-src="../Images/faces/medium/15.jpg"/>
+		</div>
+
+		<div class="image-div twoCol first" data-identifier="videos">
+			<img class="three-columns" data-index="0" data-type="video" data-src="../Images/videos/medium/korea.jpg"/>
+		</div>
+
+		<div class="image-div twoCol">
+			<img class="three-columns" data-index="1" data-type="video" data-src="../Images/videos/medium/toronto.jpg"/>
+		</div>
+
+		<div class="image-div twoCol first">
+			<img class="three-columns" data-index="2" data-type="video" data-src="../Images/videos/medium/thailand.jpg"/>
+		</div>
+
+		<div class="image-div twoCol">
+			<img class="three-columns" data-index="3" data-type="video" data-src="../Images/videos/medium/beijing.jpg"/>
+		</div>
+
+		<div id="aboutDiv" class="image-div about">
+			<img class="me" data-src="../Images/about/me2.jpg">
+			<p>Curious. Exploring. Life. Vibes. Present. Camera.</p>
+		</div>
+
+		<div id="filter-mask"></div>
+
+	</div>
+		
+
+	<div class="clearfix"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">window.history.pushState({work: "land"}, null, "land");var prevDataIndex=[];</script>
+<script type="text/javascript" src="../js/work.js"></script>
+
+</body>
+</html>

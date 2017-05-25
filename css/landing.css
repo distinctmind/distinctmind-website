@@ -65,6 +65,7 @@ body {
     height: 38px;
     left: 50%;
     top: 60%;
+    width: 30%;
     transform: translate(-50%, -50%);
     margin: 0 auto;
     z-index: 1000;
@@ -78,13 +79,7 @@ body {
 }
 
 ul li {
-
 	list-style: none;
-	border: 5px solid white;
-	height: 100%;
-	
-
-	
 }
 
 ul li a {
@@ -101,6 +96,129 @@ ul li a {
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
+
+/* basic menu styles */
+/*.navBar {
+  display: block;
+  background: #000;
+}*/
+
+.navBar li {
+  display: inline-block;
+}
+
+.navBar li a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: visible;
+  padding: 5px 10px;
+  font-family: 'Oswald' , sans-serif; 
+  font-size: 20px; 
+}
+
+/* animation domination */
+.three-d {
+  perspective: 300px;
+  transition: all .07s linear;
+  position: relative;
+  cursor: pointer;
+}
+  /* complete the animation! */
+  .three-d:hover .three-d-box {
+    transform: translateZ(-20px) rotateX(90deg);
+  }
+
+ /* .three-d:hover .front{
+    transform: translateZ(20px);
+  }*/
+
+  .three-d:hover .default span:not(.default){
+    transform: translateZ(20px);
+  }
+
+
+
+.three-d-box {
+  transition: all .3s ease-out;
+  transform: translatez(-20px);
+  transform-style: preserve-3d;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+/* 
+  put the "front" and "back" elements into place with CSS transforms, 
+  specifically translation and translatez
+*/
+.front {
+  transform: rotatex(0deg) translatez(20px);
+}
+
+.back {
+  transform: rotatex(-90deg) translatez(20px);
+  color: #ffe7c4;
+}
+
+.front, .back {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,1);
+  /*padding: 5px 10px;*/
+  padding: 4px 10px;
+  color: black;
+  pointer-events: none;
+  box-sizing: border-box;
+
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+/*.front {
+  top: 5px;
+}*/
+
+/*.back {
+  top: -5px;
+}*/
+.front.default, .back.default {
+  /*color: black;
+  background: white;*/
+  border: 3px solid white;
+}
+.it {
+  color: black;
+  background: white;
+}
+.not {
+  color: white !important;
+  background: black !important;
+  border: 3px solid white;
+}
+
+.transform {
+  transform: translateZ(-20px) rotateX(90deg);
+}
+
+.transformInverse {
+  transform: translateZ(40px) rotateX(180deg);
+}
+
 
 .border {
 	display: inline-block;

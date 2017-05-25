@@ -1,8 +1,4 @@
 $(document).ready(function() {
-
-	$("#enter").click(function(){
-		window.location.href = "street/street.html";
-	});
 	
 	$("#photos div:gt(0)").hide();
 

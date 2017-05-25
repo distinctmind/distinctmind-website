@@ -51,17 +51,17 @@ function setLeft() {
 		$("#logo").css("margin-left", String( (windowWidth-(imageWidth*3+40))/2 + "px"));
 		
 	} else if (windowWidth > 750 && windowWidth < 1200) {
-		
+
+		var portraitBlock = false;
+
 		for (var i = 0; i < selectedDivs.length; i++) {
 
 			largestHeight = Math.max(selectedDivs[i].clientHeight, largestHeight);
 			leftAmount = (windowWidth-(imageWidth*2+20))/2 + (i % 2)*(imageWidth + 20);
-			
-			if (i >= 2 && selectedDivs[i-2]) {
 
-				if (selectedDivs[i-2].classList.contains('thirdPortrait')) {
-					leftAmount = (windowWidth-(imageWidth*2+20))/2 + (i+1 % 2)*(imageWidth + 20);
-				}
+
+			if (portraitBlock == true) {
+				leftAmount = (windowWidth-(imageWidth*2+20))/2 + ( (i+1) % 2 )*(imageWidth + 20);
 			}
 
 			if (selectedDivsImg[i].hasAttribute('data-type')) {
@@ -76,17 +76,23 @@ function setLeft() {
 				}
 			}
 
-			//topAmount = (Math.floor(i/2)*(rowHeight+50));
 			selectedDivs[i].style.left = String(leftAmount) + "px";
 			selectedDivs[i].style.top = String(rowHeight) + "px";
 
-			if ((i+1)%2 == 0 || i+1== selectedDivs.length) {
+			if ( ((i+1)%2 == 0 && !portraitBlock) || ( (portraitBlock && i%2==0) || (portraitBlock && (selectedDivs.length%2==0))) ) {
 				rowHeight += largestHeight + 30;
 				largestHeight = 0;
 			}
+
+			if (i >= 1 && selectedDivs[i-1]) {
+
+				if (selectedDivs[i-1].classList.contains('thirdPortrait')) {
+					portraitBlock = true;
+				}
+			}
 		}
 
-		$("#logo").css("margin-left", String((windowWidth-(imageWidth*2+20))/2 + "px"));
+		$("#logo").css("margin-left", String((windowWidth-imageWidth*2-20)/2 + "px"));
 		
 	
 	} else if (windowWidth <= 750) {
@@ -105,7 +111,7 @@ function setLeft() {
 			selectedDivs[i].style.left = String((windowWidth-(imageWidth))/2) + "px";
 		}
 
-		$("#logo").css("margin-left", String( (windowWidth-(imageWidth))/2 + "px"));
+		$("#logo").css("margin-left", String((windowWidth-imageWidth)/2 + "px"));
 	
 	}
 	$(".container").css("height", String(rowHeight) + "px");
@@ -114,7 +120,7 @@ function setLeft() {
 /* Used to continually adjust the fixed height of each div upon window resize */
 /* Note this doesn't change the size of the first div because every other div's height is based on the first one. */
 
-function adjustHeight(type, index) {
+function adjustHeight(filter, index) {
 	
 	var selectedDivs = $(".selected");
 	var selectedDivsImg = selectedDivs.children();
@@ -171,9 +177,8 @@ function adjustHeight(type, index) {
 		//$(".container .videos").css('height', currentLandscapeHeight);
 		//$(".container .portrait").css('height', $("#firstPortrait img").height());
 		var theWindow = document.documentElement.clientWidth;
-		var scrollWidth = 0;
 
-		if (type == "videos") {
+		if (filter == "twoCol") {
 
 			if (theWindow <= 1050) {
 
@@ -184,8 +189,8 @@ function adjustHeight(type, index) {
 				setContainerHeight(1);
 				
 			} else {
-				$("#logo").css("margin-left", String( (theWindow-(firstImage.clientWidth*2+20))/2) + "px");
-				$(".first").css("margin-left", String( (theWindow - ($(".first").width()*2) - 20)/2) + "px");
+				$("#logo").css("margin-left", String( (theWindow-firstImage.clientWidth*2-20)/2) + "px");
+				$(".first").css("margin-left", String( (theWindow - $(".first").width()*2-20)/2) + "px");
 				$(".navBar").css("right", String( (theWindow-(firstImage.clientWidth*2+20))/2) + "px");
 				$("#burger").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2) + "px");
 				setContainerHeight(2);
@@ -193,26 +198,19 @@ function adjustHeight(type, index) {
 			
 		} else {
 
-
-
 			if (theWindow >= 1200) {
-				if (selectedDivs.length % 2 != 0) {
-					selectedDivs[selectedDivs.length-1].style.width = "30%";		
-				}
 				$(".navBar").css("right", String((theWindow-(firstImage.clientWidth*3+40))/2 + "px"));
 			} else if (theWindow > 750 && theWindow < 1200) {
 				
-				var portraitHeight = (currentLandscapeHeight*2) + 30;
-				
-				if (selectedDivs.length % 2 != 0) {
-
-					selectedDivs[selectedDivs.length-1].style.height = "auto";
-					selectedDivs[selectedDivs.length-1].style.width = String(theWindow- (theWindow - 2*firstImage.clientWidth - 20)) + "px";
-					
-				}
-
 				if ($(".thirdPortrait")[index]) {
+
+					var portraitHeight = (currentLandscapeHeight*2) + 30;
 					$(".thirdPortrait")[index].style.height = String(portraitHeight) + "px";
+					
+					if (selectedDivs.length%2==0) {
+						selectedDivs[selectedDivs.length-1].style.height = "auto";
+						selectedDivs[selectedDivs.length-1].style.width = String(theWindow- (theWindow - 2*firstImage.clientWidth - 20)) + "px";
+					}
 				}
 				
 				$("#burger").css("right", String((theWindow-(firstImage.clientWidth*2+20))/2 + "px"));
@@ -267,12 +265,12 @@ function showNav() {
 
 var biggerImages = [ 
 
-		'../Images/street/medium/01.jpg',
-		'../Images/street/medium/02.jpg',
-		'../Images/street/medium/03.jpg',
-		'../Images/street/medium/04.jpg',
-		'../Images/street/medium/05.jpg',
-		'../Images/street/medium/06.jpg'
+		'../Images/work/medium/01.jpg',
+		'../Images/work/medium/02.jpg',
+		'../Images/work/medium/03.jpg',
+		'../Images/work/medium/04.jpg',
+		'../Images/work/medium/05.jpg',
+		'../Images/work/medium/06.jpg'
 ]
 
 var videoTitle = {
@@ -335,14 +333,21 @@ function showPictures(theFilter) {
 		loadImage(images[i]);
 	}
 	if (theFilter == ".image-div.faces img") {
-		$(".firstPortrait").css("opacity", "1.0");
+		$(".firstPortrait")[1].style.opacity = "1.0";
+	} else if (theFilter == ".image-div.street img") {
+		$(".firstPortrait")[0].style.opacity = "1.0";
 	}
 	$("#firstImage").parent().css("opacity", "1.0");
 }
 
-function changeView(filter, index) {
-	
-		
+function changeView(type,filter,index) {
+
+	console.log("FILTER IS: " + String(filter));
+	console.log("TYPE IS: " + String(type));
+	$(".default").removeClass("not");
+	$('.default').removeClass('default');
+	$(".navBar li #" + String(type)).children().children().addClass('default');
+	$("#burger").removeClass("open");
 	$("#firstImage").removeAttr("id");
 	var mask = $("#filter-mask");
 	mask.addClass("filter-mask");
@@ -373,7 +378,7 @@ function changeView(filter, index) {
   		loadImage.onload = function(){
 
   			//If there is a portrait image also make sure image is loaded before calling adjust height
-  			if (typeof index != 'undefined') {
+  			if (typeof index != "undefined") {
 
 				$(".firstPortrait")[index].style.display = "block";
 				$(".firstPortrait img")[index].src = $(".firstPortrait img")[index].getAttribute('data-src');
@@ -389,10 +394,10 @@ function changeView(filter, index) {
 			} else {
 				adjustHeight(filter, index);
 			}
-			showPictures(".image-div" + "." + filter + " img");
+			showPictures(newSelector + " img");
 			$(".filter-mask").removeClass("filter-mask");
 			closeModal("menu");
-			if (filter == "videos") {
+			if (type == "twoCol") {
 				closeModal("video");
 			}
  		}
@@ -405,15 +410,19 @@ function changeView(filter, index) {
 function filterImages() {
 
 	$(".filter-options").click(function(){
+
+		var type = $(this).attr("id"); //video
+		var filter = $(this).data("type"); //twoCol
+
+		window.history.pushState({work:filter}, null, type);
+		prevDataIndex.push($(this).data("index"));
+		var nullPresent = prevDataIndex.some(function (el) {
+    		if (el === null) {
+    			delete prevDataIndex[prevDataIndex.indexOf(el)];
+    		}
+		});
 		
-		var filter = $(this).attr("id");
-		$(".default").removeClass("not");
-		$('.default').removeClass('default');
-		$(this).children().children().addClass('default');
-		$("#burger").removeClass("open");
-		changeView(filter, $(this).data("index"));
-		//var stateObj = { street: filter };
-		//history.pushState(stateObj, filter, filter + ".html");
+		changeView(type,filter,$(this).data("index"));
 	});	
 }
 
@@ -453,24 +462,50 @@ function popPicture(thePicture) {
 	
 	if (videoType == "video") {
 		
-		var mask = $("#filter-mask");
-		mask.addClass("filter-mask");
+		// ***** OLD CODE TO SHOW MODAL ***** 
+		// var mask = $("#filter-mask");
+		// mask.addClass("filter-mask");
 
-		setTimeout(function(){
-			$(".selected").css("display", "none");
-			$(".selected").removeClass("selected");
-			showModal("video");
-		}, 100);
+		// setTimeout(function(){
+		// 	$(".selected").css("display", "none");
+		// 	$(".selected").removeClass("selected");
+		// 	showModal("video");
+		// }, 100);
 
-		setTimeout(function(){
+		// setTimeout(function(){
 			
-			$(".filter-mask").removeClass("filter-mask");
+		// 	$(".filter-mask").removeClass("filter-mask");
 
-			var theId = Number(thePicture.attr('data-index'));
-			$(".videoTitle").text(videoTitle[theId]);
-			$(".videoSource").attr('src', videoSource[theId]);
+		// 	var theId = Number(thePicture.attr('data-index'));
+		// 	$(".videoTitle").text(videoTitle[theId]);
+		// 	$(".videoSource").attr('src', videoSource[theId]);
 
-		}, 500);
+		// }, 500);
+
+		// NEW CODE TO SCALE UP
+		$(".selected.twoCol").css("opacity", "0");
+		thePicture.parent().css("opacity", "1");
+		
+		var scaleValue2 = 1;
+		var centerValue2 = "0";
+
+		var scaleValue = 2;
+		var centerValue = "24%";
+
+		thePicture.css({
+			    '-moz-transform': 'scale(' + scaleValue2 + ') translateX('+ centerValue2 + ')',
+			    '-webkit-transform': 'scale(' + scaleValue2 + ') translateX('+ centerValue2 + ')',
+				'-ms-transform': 'scale(' + scaleValue2 + ') translateX('+ centerValue2 + ')',
+				'-o-transform': 'scale(' + scaleValue2 + ') translateX('+ centerValue2 + ')',
+				'transform': 'scale(' + scaleValue2 + ') translateX('+ centerValue2 + ')'
+			});
+		thePicture.parent().css({
+			    '-moz-transform': 'scale(' + scaleValue + ') translateX('+ centerValue + ')',
+			    '-webkit-transform': 'scale(' + scaleValue + ') translateX('+ centerValue + ')',
+				'-ms-transform': 'scale(' + scaleValue + ') translateX('+ centerValue + ')',
+				'-o-transform': 'scale(' + scaleValue + ') translateX('+ centerValue + ')',
+				'transform': 'scale(' + scaleValue + ') translateX('+ centerValue + ')'
+			});
 
 
 	} else {
@@ -522,7 +557,7 @@ function clickPicture() {
 			
 			//To go back to main video screen
 			$("#back").click(function(){
-				changeView("videos");
+				changeView("twoCol");
 			});
 			
 		}
@@ -700,7 +735,6 @@ function modalControl() {
 // 	adjustHeight($(".selected").attr('id'));
 // }
 
-
 $(document).ready(function(){
 
 	$(".three-d").hover(function(){
@@ -718,23 +752,33 @@ $(document).ready(function(){
 	$(".selected")[0].style.display = "block";
 	$(".selected img")[0].src = $(".selected img")[0].getAttribute('data-src');
 
-	$(".firstPortrait")[0].style.display = "block";
-	$(".firstPortrait img")[0].src = $(".firstPortrait img")[0].getAttribute('data-src');
-
 	var loadImage = new Image();
  	loadImage.src = $(".selected img")[0].src;
 
   	loadImage.onload = function(){
-  		
-  		var loadPortrait = new Image();
-		loadPortrait.src = $(".firstPortrait img")[0].src;
 
-		loadPortrait.onload = function() {
-			adjustHeight($(".selected").attr('id'), 0);
+  		if ( $(".selected")[0].getAttribute('data-portrait') ) {
+  			
+  			var index = $(".selected")[0].getAttribute('data-portrait');
+  			prevDataIndex.push(index);
+  			$(".firstPortrait")[index].style.display = "block";
+			$(".firstPortrait img")[index].src = $(".firstPortrait img")[index].getAttribute('data-src');
+
+  			var loadPortrait = new Image();
+			loadPortrait.src = $(".firstPortrait img")[index].src;
+
+			loadPortrait.onload = function() {
+				adjustHeight($(".selected").attr('id'), index);
+				$("#firstImage").css("opacity", "1.0");
+				$(".firstPortrait")[index].style.opacity = "1.0";
+			}
+  		} else {
+  			prevDataIndex.push($(".selected").data("portrait"));
+  			adjustHeight($(".selected").attr('id'), $(".selected").data("portrait"));
 			$("#firstImage").css("opacity", "1.0");
-			$(".firstPortrait")[0].style.opacity = "1.0";
-		}
+  		}
   	}
+
 	showNav();
 	filterImages();
 	clickPicture();
@@ -743,7 +787,7 @@ $(document).ready(function(){
 	$(window).resize(function() {
   		
   		//For height of gallery pictures
-  		adjustHeight($(".selected").attr('id'), $(".selected")[0].getAttribute("data-index"));
+  		adjustHeight($(".selected").attr('id'), $(".selected").data("portrait"));
   		//For dynamix resizing
   		modalMobileReady();
   		//For hiding and showing burger/nav bar
@@ -751,19 +795,26 @@ $(document).ready(function(){
   		
 	});
 
-	// $( window ).scroll(function() { 
-	//   //Show scrollbar 
+	window.onpopstate = function (event) {
+		
+		var nullPresent = prevDataIndex.some(function (el) {
+    		return el === null;
+		});
 
-	//   $('body').removeClass('hide-scrollbar');
+  		if (prevDataIndex.length >= 1 && !nullPresent && window.history.state != null) {
+  			console.log("BUTTON PRESS!");
+  			
+  			var currentState = window.history.state.work;
+  			var element = $("." + String(currentState));
 
-	//   // Check if we are still scrolling, else hide scrollbar
-	//   clearTimeout($.data(this, 'scrollTimer'));
-	//   $.data(this, 'scrollTimer', setTimeout(function() {
-	//     // Scrollevent not happened, hiding Scrollbar
-	//     $('body').addClass('hide-scrollbar');
-	//   }, 350));
-
-	// });
+  			prevDataIndex.pop();
+  			changeView(element.data('identifier'), currentState, prevDataIndex.pop());
+  			prevDataIndex.push(element.data('portrait'));
+  			
+  		} else {
+  			window.history.back();
+  		}
+	}	
 
 	$('#burger').click (function(){
   		

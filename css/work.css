@@ -17,33 +17,6 @@ body,html {
   position: absolute;
 }
 
-/*@media screen and (-webkit-min-device-pixel-ratio:0) {
-  body {
-    background-color: rgba(0,0,0,1);
-    -webkit-background-clip: text;
-    transition: background-color .8s;
-  }
-  body:hover {
-    background-color: rgba(255,255,255,1);  
-  }
-
-  body::-webkit-scrollbar {
-    width: 5px;
-  }
-  body::-webkit-scrollbar-track {
-    display: none;
-  }
-  body::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: inherit;
-  }
-  .hide-scrollbar {
-    background-color: rgba(255,255,255,0) !important;
-
-  }
-}
-
-*/
 /*Animation for opacity transition of images on page load */
 @keyframes animateImages {
   0% {
@@ -315,9 +288,9 @@ header img {
 header .navBar {
 
 	position: absolute;
-  top: 15px;
+  top: 10px;
   padding: 0;
-  width: 52%;
+  width: 61%;
   display: inline-flex;
 
 }
@@ -376,7 +349,7 @@ header .navBar li {
 
 }
 
-.container .image-div.about, .container .image-div.videos {
+.container .image-div.about, .container .image-div.twoCol {
   margin-left: 20px;
   margin-bottom: 30px;
   position: relative !important;
@@ -416,7 +389,7 @@ header .navBar li {
   transition: opacity 0.3s ease-in-out;
 }
 
-.container .image-div.videos img:hover {
+.container .image-div.twoCol img:hover {
   cursor: pointer;
   opacity: 0.4;
   -webkit-transition: opacity 0.5s ease-in-out;
@@ -424,6 +397,22 @@ header .navBar li {
   -ms-transition: opacity 0.5s ease-in-out;
   -o-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
+}
+
+.container .image-div.twoCol {
+  -webkit-transition: transform 1s ease-in-out;
+  -moz-transition: transform 1s ease-in-out;
+  -ms-transition: transform 1s ease-in-out;
+  -o-transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+}
+
+.container .image-div.twoCol img {
+  -webkit-transition: transform 1s ease-in-out;
+  -moz-transition: transform 1s ease-in-out;
+  -ms-transition: transform 1s ease-in-out;
+  -o-transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
 }
 
 #firstImage {
@@ -485,7 +474,7 @@ header .navBar li {
     /*min-width: 92.4%;*/
   }
 
-  .container .image-div.videos {
+  .container .image-div.twoCol {
     max-width: 45.4%;
   }
 
@@ -515,7 +504,7 @@ header .navBar li {
 }
 
 @media (max-width: 1050px) {
-  .container .image-div.videos {
+  .container .image-div.twoCol {
     width: 93%;
   }
 }
